@@ -15,7 +15,7 @@ Le résultat du projet est aussi consultable directement en ligne via github pag
 
 ## Pour démarrer
 
-Une fois le projet cloné, il faut installer les dépandences, (ou plutôt LA dépandence)
+Une fois le projet cloné, il faut installer les dépendances, (ou plutôt LA dépandence, le package "serve")
 
 ### Installation avec npm
 ```sh
