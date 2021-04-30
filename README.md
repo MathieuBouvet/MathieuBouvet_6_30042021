@@ -11,7 +11,7 @@ Le projet inclu une dépendance de developpement, [serve](https://www.npmjs.com/
 Il est toutefois impératif d'avoir [node.js](https://nodejs.org/en/) et un gestionnaire de paquets javascript, 
 comme [npm](https://www.npmjs.com) ou [yarn](https://yarnpkg.com), disponibles sur sa machine
 
-Le résultat du projet est aussi consultable directement en ligne via github pages
+Le résultat du projet est aussi consultable directement en ligne via github pages : https://mathieubouvet.github.io/MathieuBouvet_6_30042021/
 
 ## Pour démarrer
 
