@@ -1,0 +1,14 @@
+{
+  "name": "oc_mathieu_bouvet_p6_fisheye",
+  "version": "1.0.0",
+  "description": "openclassrooms project n°6 - web app for freelance photographers",
+  "main": "index.js",
+  "scripts": {
+    "dev": "serve -l 5000"
+  },
+  "author": "mathieu bouvet",
+  "license": "ISC",
+  "devDependencies": {
+    "serve": "^11.3.2"
+  }
+}
