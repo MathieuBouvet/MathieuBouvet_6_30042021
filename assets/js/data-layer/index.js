@@ -15,10 +15,12 @@ export function getPhotographerById(photographerId) {
 }
 
 export function getAllTags() {
-  return data.photographers.reduce((tags, photograper) => {
-    tags.push(...photograper.tags);
-    return tags;
-  }, []);
+  const tagSet = new Set();
+  data.photographers.reduce((tagSet, photographer) => {
+    photographer.tags.forEach(tag => tagSet.add(tag));
+    return tagSet;
+  }, tagSet);
+  return [...tagSet];
 }
 
 export function getMediaForPhotographer(photographerId) {
