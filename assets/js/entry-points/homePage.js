@@ -1,12 +1,14 @@
 import { createRootTemplate, createStore } from "../lib/zip-template/index.js";
-import { getAllTags, getPhotographers } from "../data-layer/index.js";
+import { getAllTags, getPhotographers } from "../dataLayer.js";
 import homePageTemplate from "../templates/home-page/index.js";
 
-const homePageInitialData = {
-  tags: getAllTags(),
-  photographers: getPhotographers(),
-};
+(async () => {
+  const homePageInitialData = {
+    tags: await getAllTags(),
+    photographers: await getPhotographers(),
+  };
 
-const homePageStore = createStore(homePageInitialData);
+  const homePageStore = createStore(homePageInitialData);
 
-createRootTemplate(document.body, homePageTemplate(), homePageStore);
+  createRootTemplate(document.body, homePageTemplate(), homePageStore);
+})();
