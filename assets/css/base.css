@@ -1,0 +1,25 @@
+:root {
+  --color-primary-1: #901c1c;
+  --color-primary-2: #d3573c;
+
+  --color-secondary: #525252;
+
+  --color-foundation-1: #db8876;
+  --color-foundation-2: #fafafa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "DM Sans", sans-serif;
+}
+
+.sr-only {
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute;
+}

@@ -1,0 +1,18 @@
+.tag-label {
+  border: 1px solid #c4c4c4;
+  border-radius: 500px;
+  padding: 0 5px;
+  color: var(--color-primary-1);
+  cursor: pointer;
+}
+
+.tag-input:focus ~ .tag-label,
+.tag-label:hover {
+  text-decoration: underline;
+}
+
+.tag-input:checked ~ .tag-label {
+  background-color: var(--color-primary-1);
+  border-color: var(--color-primary-1);
+  color: white;
+}

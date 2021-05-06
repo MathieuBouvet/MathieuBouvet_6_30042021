@@ -27,7 +27,7 @@ const HomePage = template((_, { read, write, render }) => {
           <img src="assets/images/fisheye-logo.png" alt="Fish Eye Homepage" />
         </a>
         <nav aria-label="photographer categories">
-          <ul>
+          <ul class="tag-list">
             ${tags.map(tag =>
               render(
                 html`<li>
