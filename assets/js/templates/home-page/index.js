@@ -1,17 +1,24 @@
 import { html, template } from "../../lib/zip-template/index.js";
-import Photographer from "./photographer.js";
+import Photographer from "./Photographer.js";
+import Tag from "../ui/Tag.js";
 
-const homePage = template((_, { read, write, render }) => {
+const HomePage = template((_, { read, write, render }) => {
   const tags = read(store => store.tags);
-  const selectedTag = read(store => store.selectedTag);
-  const setSelectedTag = tag => write(store => (store.selectedTag = tag));
+  const selectedTags = read(store => store.selectedTags);
+  const addTag = tag => write(store => store.selectedTags.push(tag));
+  const removeTag = tag =>
+    write(
+      store =>
+        (store.selectedTags = store.selectedTags.filter(
+          existingTag => existingTag !== tag
+        ))
+    );
 
   const photographers = read(store => store.photographers);
-  const filteredByTag = selectedTag
-    ? photographers.filter(photographer =>
-        photographer.tags.includes(selectedTag)
-      )
-    : photographers;
+
+  const filteredPhotographers = photographers.filter(photographer =>
+    selectedTags.every(selectedTag => photographer.tags.includes(selectedTag))
+  );
 
   return html`
     <body>
@@ -24,12 +31,14 @@ const homePage = template((_, { read, write, render }) => {
             ${tags.map(tag =>
               render(
                 html`<li>
-                  <button
-                    class="${selectedTag === tag ? "selected" : ""}"
-                    @click=${() => setSelectedTag(tag)}
-                  >
-                    #${tag}
-                  </button>
+                  ${render(
+                    Tag({
+                      label: tag,
+                      checked: selectedTags.includes(tag),
+                      onCheck: addTag,
+                      onUncheck: removeTag,
+                    })
+                  )}
                 </li>`
               )
             )}
@@ -38,7 +47,7 @@ const homePage = template((_, { read, write, render }) => {
       </header>
       <main>
         <h1>Nos Photographes</h1>
-        ${filteredByTag.map(photographer =>
+        ${filteredPhotographers.map(photographer =>
           render(Photographer({ ...photographer }))
         )}
       </main>
@@ -46,4 +55,4 @@ const homePage = template((_, { read, write, render }) => {
   `;
 });
 
-export default homePage;
+export default HomePage;
