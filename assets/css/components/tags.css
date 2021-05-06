@@ -5,10 +5,13 @@
   color: var(--color-primary-1);
   cursor: pointer;
 }
+.tag-label::before {
+  content: "#";
+}
 
-.tag-input:focus ~ .tag-label,
-.tag-label:hover {
-  text-decoration: underline;
+.tag-input:focus ~ .tag-label {
+  outline: 2px solid var(--color-primary-1);
+  outline-offset: 2px;
 }
 
 .tag-input:checked ~ .tag-label {

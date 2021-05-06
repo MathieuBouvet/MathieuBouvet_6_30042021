@@ -14,7 +14,7 @@ const Tag = template(({ label, id, checked, onCheck, onUncheck }) => {
       :checked=${checked}
       class="tag-input sr-only"
     />
-    <label class="tag-label" for="${tagId}">#${label}</label>
+    <label class="tag-label" for="${tagId}">${label}</label>
   `;
 });
 
