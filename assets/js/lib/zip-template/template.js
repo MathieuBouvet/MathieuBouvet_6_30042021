@@ -67,5 +67,5 @@ export function html(strings, ...expressions) {
   The context object provide access to the store, and a render function, for nesting templates.
 */
 export function template(templateFn) {
-  return props => context => templateFn(props, context);
+  return (...args) => context => templateFn(...args, context);
 }

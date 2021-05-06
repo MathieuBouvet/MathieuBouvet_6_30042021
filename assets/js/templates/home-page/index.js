@@ -2,7 +2,7 @@ import { html, template } from "../../lib/zip-template/index.js";
 import Photographer from "./Photographer.js";
 import Tag from "../ui/Tag.js";
 
-const HomePage = template((_, { read, write, render }) => {
+const HomePage = template(({ read, write, render }) => {
   const tags = read(store => store.tags);
   const selectedTags = read(store => store.selectedTags);
   const addTag = tag => write(store => store.selectedTags.push(tag));
