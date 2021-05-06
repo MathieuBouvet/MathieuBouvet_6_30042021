@@ -14,33 +14,35 @@ const homePage = template((_, { read, write, render }) => {
     : photographers;
 
   return html`
-    <header>
-      <a href=""
-        ><img src="assets/images/fisheye-logo.png" alt="Fish Eye Homepage"
-      /></a>
-      <nav aria-label="photographer categories">
-        <ul>
-          ${tags.map(tag =>
-            render(
-              html`<li>
-                <button
-                  class="${selectedTag === tag ? "selected" : ""}"
-                  @click=${() => setSelectedTag(tag)}
-                >
-                  #${tag}
-                </button>
-              </li>`
-            )
-          )}
-        </ul>
-      </nav>
-    </header>
-    <main>
-      <h1>Nos Photographes</h1>
-      ${filteredByTag.map(photographer =>
-        render(Photographer({ ...photographer }))
-      )}
-    </main>
+    <body>
+      <header>
+        <a href="">
+          <img src="assets/images/fisheye-logo.png" alt="Fish Eye Homepage" />
+        </a>
+        <nav aria-label="photographer categories">
+          <ul>
+            ${tags.map(tag =>
+              render(
+                html`<li>
+                  <button
+                    class="${selectedTag === tag ? "selected" : ""}"
+                    @click=${() => setSelectedTag(tag)}
+                  >
+                    #${tag}
+                  </button>
+                </li>`
+              )
+            )}
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <h1>Nos Photographes</h1>
+        ${filteredByTag.map(photographer =>
+          render(Photographer({ ...photographer }))
+        )}
+      </main>
+    </body>
   `;
 });
 

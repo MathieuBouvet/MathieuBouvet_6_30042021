@@ -1,3 +1,4 @@
+import { DiffDOM } from "../diff-dom/index.js";
 /*
   Create a root template, wich is like an entry point for the library.
   Attach the result of rendering the template to the dom element specified in the parameters.
@@ -5,6 +6,7 @@
 */
 export function createRootTemplate(node, template, store) {
   let listenersToRegister = [];
+  let registeredListeners = [];
 
   const context = {
     read: store.read,
@@ -13,12 +15,15 @@ export function createRootTemplate(node, template, store) {
   };
 
   function render() {
-    const focusedElementRef = getFocusedElementRef(); // for preserving elements focus between renders
+    const domDiffer = new DiffDOM();
     const htmlString = renderTemplate(template);
+    const newNode = new DOMParser().parseFromString(htmlString, "text/html");
 
-    node.innerHTML = htmlString;
+    const diff = domDiffer.diff(node, newNode.body);
 
-    focusElement(focusedElementRef); // for preserving elements focus between renders
+    removeTemplatesEventListeners();
+
+    domDiffer.apply(node, diff);
 
     registerTemplatesEventListeners();
   }
@@ -34,55 +39,35 @@ export function createRootTemplate(node, template, store) {
   function renderTemplate(template) {
     const [htmlString, listeners] =
       typeof template === "function" ? template(context) : template;
-      listenersToRegister.push(...listeners);
+    listenersToRegister.push(...listeners);
     return htmlString;
   }
 
   function registerTemplatesEventListeners() {
     listenersToRegister.forEach(listener => {
       const node = document.querySelector(`[data-temp-ref-${listener.ref}`);
-      node?.addEventListener(listener.eventName, listener.handler);
       node?.removeAttribute(`data-temp-ref-${listener.ref}`);
+      if (node != null) {
+        registerListener(node, listener.eventName, listener.handler);
+      }
     });
     listenersToRegister = [];
   }
 
-  function getFocusedElementRef() {
-    const focusableElements = [...node.querySelectorAll("[data-focus-ref]")];
-    const focusedElement = focusableElements.find(
-      element => element === document.activeElement
-    );
-
-    return focusedElement
-      ? focusedElement.getAttribute("data-focus-ref")
-      : null;
+  function registerListener(node, eventName, handler) {
+    node.addEventListener(eventName, handler);
+    registeredListeners.push({
+      node,
+      eventName,
+      handler,
+    });
   }
 
-  function focusElement(focusRef) {
-    const previouslyFocusedElement = node.querySelector(
-      `[data-focus-ref="${focusRef}"`
-    );
-    if (previouslyFocusedElement == null) {
-      return;
-    }
-    previouslyFocusedElement.focus();
-    // handle cursor position on input and textarea elements
-    if (isCursorControllable(previouslyFocusedElement)) {
-      const end = previouslyFocusedElement.value.length;
-      previouslyFocusedElement.setSelectionRange(end, end);
-    } else if (previouslyFocusedElement.type === "number") {
-      // cursor position for number inputs hack
-      const previousValue = previouslyFocusedElement.value;
-      previouslyFocusedElement.value = previousValue + 1;
-      previouslyFocusedElement.value = previousValue;
-    }
-  }
-
-  function isCursorControllable(element) {
-    return (
-      element.nodeName === "TEXTAREA" ||
-      ["text", "search", "url", "tel", "password"].includes(element.type)
-    );
+  function removeTemplatesEventListeners() {
+    registeredListeners.forEach(({ node, eventName, handler }) => {
+      node.removeEventListener(eventName, handler);
+    });
+    registeredListeners = [];
   }
 
   store.subscribe({ render });
