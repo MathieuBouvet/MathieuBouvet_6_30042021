@@ -1,6 +1,65 @@
+#app {
+  max-width: 850px;
+  margin: auto;
+  margin-top: 40px;
+  padding: 0 20px;
+  position: relative;
+}
+
+#app-title {
+  position: absolute;
+  top: 5px;
+  right: 20px;
+  font-size: 1rem;
+  font-weight: lighter;
+}
+
+#fisheye-logo {
+  width: 150px;
+}
+
 .tag-list {
   list-style: none;
   display: flex;
   padding: 0;
   gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.photographer {
+  text-align: center;
+}
+
+.photographer-link {
+  text-decoration: none;
+  color: var(--color-primary-2);
+}
+
+.photographer-portrait {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.photographer-name {
+  font-size: 3rem;
+  color: var(--color-primary-2);
+  font-weight: lighter;
+}
+
+.photographer-data {
+  display: flex;
+  flex-direction: column;
+}
+
+.photographer-location {
+  color: var(--color-primary-1);
+  font-size: 1.2rem;
+}
+
+.photographer-price {
+  color: #757575;
+  font-size: 0.9rem;
 }

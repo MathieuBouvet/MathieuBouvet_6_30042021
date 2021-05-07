@@ -1,20 +1,48 @@
 import { html, template } from "../../lib/zip-template/index.js";
+import Tag from "../ui/Tag.js";
+import { useSelectedTags } from "./useSelectedTags.js";
 
 const Photographer = template(
-  ({ id, name, portrait, city, tagline, price, tags, country }, { render }) => {
+  ({ id, name, portrait, city, tagline, price, tags, country }, context) => {
+    const { render, useStore } = context;
+    const { selectedTags, addTag, removeTag } = useSelectedTags(useStore);
     return html`
-      <section>
-        <a href="pages/photographer?id=${id}" aria-label="${name}">
-          <figure>
-            <img src="assets/images/photographers/${portrait}" alt="" class="photographer-portrait"/>
-            <figcaption><h2>${name}</h2></figcaption>
+      <section class="photographer">
+        <a
+          class="photographer-link"
+          href="pages/photographer?id=${id}"
+          aria-label="${name}"
+        >
+          <figure class="photographer-figure">
+            <img
+              src="assets/images/photographers/small-${portrait}"
+              alt=""
+              class="photographer-portrait"
+            />
+            <figcaption><h2 class="photographer-name">${name}</h2></figcaption>
           </figure>
         </a>
-        <p>
-          <span>${city}, ${country}</span><span>${tagline}</span><span>${price}€/jour</span>
+        <p class="photographer-data">
+          <span class="photographer-location">${city}, ${country}</span>
+          <span class="photgrapher-tagline">${tagline}</span>
+          <span class="photographer-price">${price}€/jour</span>
         </p>
-        <ul>
-          ${tags.map(tag => render(html`<li>#${tag}</li>`))}
+        <ul class="tag-list">
+          ${tags.map(tag =>
+            render(
+              html`<li>
+                ${render(
+                  Tag({
+                    label: tag,
+                    id: `photographer-${id}-tag-${tag}`,
+                    checked: selectedTags.includes(tag),
+                    onCheck: addTag,
+                    onUncheck: removeTag,
+                  })
+                )}
+              </li>`
+            )
+          )}
         </ul>
       </section>
     `;

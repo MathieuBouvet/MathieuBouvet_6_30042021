@@ -1,15 +1,12 @@
 import { html, template } from "../../lib/zip-template/index.js";
 import Photographer from "./Photographer.js";
 import Tag from "../ui/Tag.js";
+import { useSelectedTags } from "./useSelectedTags.js";
 
-const HomePage = template(({render, useStore }) => {
+const HomePage = template(({ render, useStore }) => {
   const [tags] = useStore(store => store.tags);
-  const [selectedTags, setSelectedTags] = useStore(store => store.selectedTags);
-  
-  const addTag = tag => setSelectedTags([...selectedTags, tag]);
-  const removeTag = tag =>
-    setSelectedTags(selectedTags.filter(existingTag => existingTag !== tag));
 
+  const { selectedTags, addTag, removeTag } = useSelectedTags(useStore);
   const [photographers] = useStore(store => store.photographers);
 
   const filteredPhotographers = photographers.filter(photographer =>
@@ -17,10 +14,14 @@ const HomePage = template(({render, useStore }) => {
   );
 
   return html`
-    <body>
+    <section id="app">
       <header>
         <a href="">
-          <img src="assets/images/fisheye-logo.png" alt="Fish Eye Homepage" />
+          <img
+            id="fisheye-logo"
+            src="assets/images/fisheye-logo.png"
+            alt="Fish Eye Homepage"
+          />
         </a>
         <nav aria-label="photographer categories">
           <ul class="tag-list">
@@ -42,12 +43,12 @@ const HomePage = template(({render, useStore }) => {
         </nav>
       </header>
       <main>
-        <h1>Nos Photographes</h1>
+        <h1 id="app-title">Nos Photographes</h1>
         ${filteredPhotographers.map(photographer =>
           render(Photographer({ ...photographer }))
         )}
       </main>
-    </body>
+    </section>
   `;
 });
 

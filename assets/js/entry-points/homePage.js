@@ -11,5 +11,5 @@ import HomePage from "../templates/home-page/index.js";
 
   const homePageStore = createStore(homePageInitialData);
 
-  createRootTemplate(document.body, HomePage(), homePageStore);
+  createRootTemplate(document.getElementById("app"), HomePage(), homePageStore);
 })();
