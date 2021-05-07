@@ -1,4 +1,5 @@
 import { DiffDOM } from "../diff-dom/index.js";
+import { isCallable } from "./helpers/typeChecker.js";
 /*
   Create a root template, wich is like an entry point for the library.
   Attach the result of rendering the template to the dom element specified in the parameters.
@@ -9,8 +10,7 @@ export function createRootTemplate(node, template, store) {
   let registeredListeners = [];
 
   const context = {
-    read: store.read,
-    write: store.write,
+    useStore: store.useStore,
     render: renderTemplate,
   };
 
@@ -37,8 +37,9 @@ export function createRootTemplate(node, template, store) {
     It also gathers the event listeners to set up, once the rendering to the dom is done.
   */
   function renderTemplate(template) {
-    const [htmlString, listeners] =
-      typeof template === "function" ? template(context) : template;
+    const [htmlString, listeners] = isCallable(template)
+      ? template(context)
+      : template;
     listenersToRegister.push(...listeners);
     return htmlString;
   }

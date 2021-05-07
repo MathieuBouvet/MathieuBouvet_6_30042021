@@ -2,19 +2,15 @@ import { html, template } from "../../lib/zip-template/index.js";
 import Photographer from "./Photographer.js";
 import Tag from "../ui/Tag.js";
 
-const HomePage = template(({ read, write, render }) => {
-  const tags = read(store => store.tags);
-  const selectedTags = read(store => store.selectedTags);
-  const addTag = tag => write(store => store.selectedTags.push(tag));
+const HomePage = template(({render, useStore }) => {
+  const [tags] = useStore(store => store.tags);
+  const [selectedTags, setSelectedTags] = useStore(store => store.selectedTags);
+  
+  const addTag = tag => setSelectedTags([...selectedTags, tag]);
   const removeTag = tag =>
-    write(
-      store =>
-        (store.selectedTags = store.selectedTags.filter(
-          existingTag => existingTag !== tag
-        ))
-    );
+    setSelectedTags(selectedTags.filter(existingTag => existingTag !== tag));
 
-  const photographers = read(store => store.photographers);
+  const [photographers] = useStore(store => store.photographers);
 
   const filteredPhotographers = photographers.filter(photographer =>
     selectedTags.every(selectedTag => photographer.tags.includes(selectedTag))

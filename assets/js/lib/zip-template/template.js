@@ -27,8 +27,11 @@ function formatExpression(expression, skip) {
   Parses the received strings to handle template directives and evaluates expressions.
   
   There are 2 supported template directives :
-    @[eventName]=${[handler]} : for setting up an event listener. Registers [handler] to the [eventName] event
-    :[booleanAttribute]=${[expression]} : ouputs [booleanAttribute] if [expression] evaluates to true, nothing otherwise
+    @[eventName]=${[handler]} : 
+      for setting up an event listener. Registers [handler] to the [eventName] event
+
+    :[booleanAttribute]=${[expression]} :
+      ouputs [booleanAttribute] if [expression] evaluates to true, nothing otherwise
     
   The function returns the html string, and a list of object for setting up event listeners.
   The root template will handle rendering the string to the dom, and setting up the event listeners.
