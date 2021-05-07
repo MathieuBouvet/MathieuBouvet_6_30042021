@@ -38,6 +38,7 @@ function formatExpression(expression, skip) {
 */
 export function html(strings, ...expressions) {
   const gatheredListeners = [];
+  const gatheredBooleans = [];
   const htmlString = strings.reduce((result, currentString, i) => {
     let skipExpression = !expressions[i] && expressions[i] !== 0;
 
@@ -50,9 +51,11 @@ export function html(strings, ...expressions) {
 
     currentString = currentString.replace(
       booleanAttributeDirective,
-      (_, attributeName) => {
+      (_, name) => {
+        const ref = autoIncrementer.next().value;
         skipExpression = true;
-        return ` ${expressions[i] ? attributeName : ""}`;
+        gatheredBooleans.push({ name, ref, value: expressions[i] });
+        return ` data-temp-ref-${ref}`;
       }
     );
 
@@ -61,7 +64,7 @@ export function html(strings, ...expressions) {
     return `${result + currentString}${expression}`;
   }, "");
 
-  return [htmlString, gatheredListeners];
+  return [htmlString, gatheredListeners, gatheredBooleans];
 }
 
 /* Take a template function, and return a partial application of this function.

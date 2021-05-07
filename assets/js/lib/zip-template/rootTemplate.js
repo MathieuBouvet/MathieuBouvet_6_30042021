@@ -5,9 +5,11 @@ import { isCallable } from "./helpers/typeChecker.js";
   Attach the result of rendering the template to the dom element specified in the parameters.
   Must also receive a store object
 */
+
 export function createRootTemplate(node, template, store) {
   let listenersToRegister = [];
   let registeredListeners = [];
+  let booleanAttributesToHandle = [];
 
   const context = {
     useStore: store.useStore,
@@ -19,12 +21,13 @@ export function createRootTemplate(node, template, store) {
     const htmlString = renderTemplate(template);
     const newNode = new DOMParser().parseFromString(htmlString, "text/html");
 
-    const diff = domDiffer.diff(node, newNode.body);
+    const diff = domDiffer.diff(node, newNode.body.firstChild);
 
     removeTemplatesEventListeners();
 
     domDiffer.apply(node, diff);
 
+    handleBooleanAttributes();
     registerTemplatesEventListeners();
   }
 
@@ -37,10 +40,11 @@ export function createRootTemplate(node, template, store) {
     It also gathers the event listeners to set up, once the rendering to the dom is done.
   */
   function renderTemplate(template) {
-    const [htmlString, listeners] = isCallable(template)
+    const [htmlString, listeners, booleansAttributes] = isCallable(template)
       ? template(context)
       : template;
     listenersToRegister.push(...listeners);
+    booleanAttributesToHandle.push(...booleansAttributes);
     return htmlString;
   }
 
@@ -69,6 +73,20 @@ export function createRootTemplate(node, template, store) {
       node.removeEventListener(eventName, handler);
     });
     registeredListeners = [];
+  }
+
+  function handleBooleanAttributes() {
+    booleanAttributesToHandle.forEach(attribute => {
+      const node = document.querySelector(`[data-temp-ref-${attribute.ref}`);
+      node?.removeAttribute(`data-temp-ref-${attribute.ref}`);
+      if (attribute.value) {
+        node?.setAttribute(attribute.name, "");
+      } else {
+        node?.removeAttribute(attribute.name);
+      }
+      node[attribute.name] = attribute.value;
+    });
+    booleanAttributesToHandle = [];
   }
 
   store.subscribe({ render });
