@@ -33,23 +33,27 @@ export function createStore(initialData = {}) {
   /*
     Provide access to the store.
     Take a selector function, which will receive the store data.
-    This function must return the store property needed to be accessed.
+    This function must return the store property needed to be accessed, aka the target.
 
     Provide access to the root of the store by default.
     
     A useStore call will return a tuple :
 
-      1 - The read only value selected by the selector function. 
+      1 - The read only value targeted by the selector function. 
           It is a proxy that will block all modification attempts
 
       2 - The update function. It takes either the new value directly,
-          or a function that will receive the selected value.
+          or a function that will be called with the targeted value.
+
+          It sets the targeted value to the provided value, or the result of the function call. 
+
           It checks for strict equality between the previous and the new value,
           and trigger a new render appropriatly.
     
-    There is a bit of convoluted logic involved to handle references to value, instead of "normal" values,
-    but this allow for a simple API, with a selector function, describing exactly which part of the state
-    is needed, and provide a simple way to update it
+    There is a bit of convoluted logic involved to handle references to value instead of "normal" values,
+    and thus allowing this "target" mechanism.
+    But this allow for a simple API, with a selector function describing exactly which part of the state
+    is needed, and provide a simple way to update it.
 
     example : 
 
@@ -64,7 +68,7 @@ export function createStore(initialData = {}) {
     const storeValue = selectorFn(dataImmutable);
 
     const setStoreValue = value => {
-      let target = selectorFn(dataReferences);
+      const target = selectorFn(dataReferences);
       const previousValue = target[REF_SYMBOL];
 
       const newValue = isCallable(value) ? value(storeValue) : value;
