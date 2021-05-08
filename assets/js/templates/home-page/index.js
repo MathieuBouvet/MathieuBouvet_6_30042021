@@ -1,7 +1,7 @@
 import { html, template } from "../../lib/zip-template/index.js";
 import Photographer from "./Photographer.js";
 import Tag from "../ui/Tag.js";
-import { useSelectedTags } from "../../utils/useSelectedTags.js";
+import tagSelection from "../../hooks/tagSelection.js";
 
 function getCenteredClass(photographerNumber) {
   let centeredClass = "";
@@ -14,10 +14,10 @@ function getCenteredClass(photographerNumber) {
   return centeredClass;
 }
 
-const HomePage = template(({ render, useStore }) => {
+const HomePage = template(({ render, useStore, use }) => {
   const [tags] = useStore(store => store.tags);
 
-  const { selectedTags, addTag, removeTag } = useSelectedTags(useStore);
+  const { selectedTags, addTag, removeTag } = use(tagSelection());
   const [photographers] = useStore(store => store.photographers);
 
   const filteredPhotographers = photographers.filter(photographer =>

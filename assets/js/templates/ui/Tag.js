@@ -1,11 +1,11 @@
 import { html, template } from "../../lib/zip-template/index.js";
 
-const Tag = template(({ label, id, checked, onCheck, onUncheck }) => {
+const Tag = ({ label, id, checked, onCheck, onUncheck }) => {
   const handleChange = e => {
     const handler = e.target.checked ? onCheck : onUncheck;
     handler(label);
   };
-  const tagId = id ?? `tag-${label}`
+  const tagId = id ?? `tag-${label}`;
   return html`
     <input
       type="checkbox"
@@ -16,6 +16,6 @@ const Tag = template(({ label, id, checked, onCheck, onUncheck }) => {
     />
     <label class="tag-label" for="${tagId}">${label}</label>
   `;
-});
+};
 
-export default Tag;
+export default template(Tag);

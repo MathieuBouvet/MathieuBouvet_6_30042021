@@ -1,4 +1,6 @@
-export function useSelectedTags(useStore) {
+import { hook } from "../lib/zip-template/index.js";
+
+function tagSelection({ useStore }) {
   const [selectedTags, setSelectedTags] = useStore(store => store.selectedTags);
 
   const addTag = tag => setSelectedTags([...selectedTags, tag]);
@@ -11,3 +13,5 @@ export function useSelectedTags(useStore) {
     removeTag,
   };
 }
+
+export default hook(tagSelection);
