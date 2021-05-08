@@ -1,3 +1,4 @@
+
 /* A simple generator function for generating numbers. Used internally. */
 function* numberGenerator() {
   let i = 0;
@@ -65,13 +66,4 @@ export function html(strings, ...expressions) {
   }, "");
 
   return [htmlString, gatheredListeners, gatheredBooleans];
-}
-
-/* Take a template function, and return a partial application of this function.
-  This partial application will be called by the library, and will provide the "context" object,
-  allowing its access in the template function definition.
-  The context object provide access to the store, and a render function, for nesting templates.
-*/
-export function template(templateFn) {
-  return (...args) => context => templateFn(...args, context);
 }

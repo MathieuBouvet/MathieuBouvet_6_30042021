@@ -20,6 +20,7 @@ export function createRootTemplate(node, template, store) {
   const context = {
     useStore: store.useStore,
     render: renderTemplate,
+    use: provideContext,
   };
 
   function render() {
@@ -53,6 +54,13 @@ export function createRootTemplate(node, template, store) {
     listenersToRegister.push(...listeners);
     booleanAttributesToHandle.push(...booleansAttributes);
     return htmlString;
+  }
+
+  /*
+    Used to provide the context to a function, usefull for custom hooks
+  */
+  function provideContext(customHookFn){
+    return customHookFn(context);
   }
 
   function registerTemplatesEventListeners() {
