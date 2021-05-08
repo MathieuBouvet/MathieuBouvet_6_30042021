@@ -29,8 +29,8 @@ h1 {
 h2 {
   margin: 0;
 }
-
-p {
+p,
+figure {
   margin: 0;
 }
 

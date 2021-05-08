@@ -1,6 +1,6 @@
 import { html, template } from "../../lib/zip-template/index.js";
 import Tag from "../ui/Tag.js";
-import { useSelectedTags } from "./useSelectedTags.js";
+import { useSelectedTags } from "../../utils/useSelectedTags.js";
 
 const Photographer = template(
   ({ id, name, portrait, city, tagline, price, tags, country }, context) => {

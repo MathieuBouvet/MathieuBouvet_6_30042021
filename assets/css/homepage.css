@@ -1,5 +1,5 @@
 #app {
-  max-width: 850px;
+  max-width: 1440px;
   margin: auto;
   margin-top: 40px;
   padding: 0 20px;
@@ -8,7 +8,7 @@
 
 #app-title {
   position: absolute;
-  top: 5px;
+  top: 12px;
   right: 20px;
   font-size: 1rem;
   font-weight: lighter;
@@ -16,6 +16,10 @@
 
 #fisheye-logo {
   width: 150px;
+}
+
+.home-link {
+  display: block;
 }
 
 .tag-list {
@@ -29,11 +33,13 @@
 
 .photographer {
   text-align: center;
+  margin-top: 55px;
 }
 
 .photographer-link {
   text-decoration: none;
   color: var(--color-primary-2);
+  display: block;
 }
 
 .photographer-portrait {
@@ -41,6 +47,7 @@
   width: 200px;
   object-fit: cover;
   border-radius: 50%;
+  box-shadow: 0 4px 12px 0 #c4c4c4;
 }
 
 .photographer-name {
@@ -62,4 +69,66 @@
 .photographer-price {
   color: #757575;
   font-size: 0.9rem;
+}
+
+.no-result-info {
+  text-align: center;
+  margin: 55px auto;
+  color: #757575;
+}
+
+@media screen and (min-width: 550px) {
+  #fisheye-logo {
+    width: 200px;
+  }
+
+  #app-title {
+    top: 15px;
+    font-size: 1.5rem;
+  }
+
+  #main-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  #main-content.centered-medium {
+    justify-content: center;
+  }
+
+  .photographer {
+    flex: 0 1 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  #homepage-header {
+    display: flex;
+    width: calc(100% - 380px);
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  #app-title {
+    right: 80px;
+    top: 10px;
+    font-size: 2rem;
+  }
+
+  #main-content.centered-large {
+    justify-content: center;
+  }
+
+  .home-link {
+    margin-left: 100px;
+  }
+
+  .photographer {
+    flex: 0 1 30%;
+    margin-top: 35px;
+  }
 }
