@@ -18,6 +18,10 @@
   width: 150px;
 }
 
+#main-content {
+  scroll-margin-top: 55px;
+}
+
 .home-link {
   display: block;
 }
@@ -77,6 +81,21 @@
   color: #757575;
 }
 
+.scroll-to-top {
+  position: fixed;
+  display: block;
+  top: 15px;
+  left: calc(50% - 74px);
+  margin: auto;
+  text-decoration: none;
+  background-color: var(--color-foundation-1);
+  border-radius: 5px;
+  padding: 3px 6px;
+  color: black;
+  font-weight: 400;
+  animation: fade-in 0.3s forwards;
+}
+
 @media screen and (min-width: 550px) {
   #fisheye-logo {
     width: 200px;
@@ -91,6 +110,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    scroll-margin-top: 16px;
   }
 
   #main-content.centered-medium {
@@ -130,5 +150,16 @@
   .photographer {
     flex: 0 1 30%;
     margin-top: 35px;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

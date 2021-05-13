@@ -7,6 +7,7 @@ import HomePage from "../templates/home-page/index.js";
     tags: await getAllTags(),
     photographers: await getPhotographers(),
     selectedTags: [],
+    isAwayFromTop: true,
   };
 
   const homePageStore = createStore(homePageInitialData);

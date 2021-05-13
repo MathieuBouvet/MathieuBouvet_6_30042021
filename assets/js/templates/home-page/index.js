@@ -14,8 +14,10 @@ function getCenteredClass(photographerNumber) {
   return centeredClass;
 }
 
-const HomePage = template(({ render, useStore, use }) => {
+const HomePage = template(({ render, useStore, use, useEffect }) => {
   const [tags] = useStore(store => store.tags);
+
+  const [isAwayFromTop, setIsAwayFromTop] = useStore(store => store.isAwayFromTop);
 
   const { selectedTags, addTag, removeTag } = use(tagSelection());
   const [photographers] = useStore(store => store.photographers);
@@ -24,9 +26,20 @@ const HomePage = template(({ render, useStore, use }) => {
     selectedTags.every(selectedTag => photographer.tags.includes(selectedTag))
   );
 
+  useEffect(() => {
+    const homepageHeader = document.getElementById("homepage-header");
+    const observer = new IntersectionObserver(entries => {
+      setIsAwayFromTop(entries[0].isIntersecting);
+    });
+    observer.observe(homepageHeader);
+
+    return () => observer.disconnect();
+  });
+
   return html`
     <div id="app">
       <header id="homepage-header">
+        ${!isAwayFromTop && render(html`<a class="scroll-to-top" href="#main-content">Passer au contenu</a>`)}
         <a class="home-link" href="">
           <img
             id="fisheye-logo"
