@@ -52,12 +52,20 @@ export function createRootTemplate(node, template, store) {
     It also gathers the event listeners and the boolean attributes to set up.
   */
   function renderTemplate(template) {
-    const [htmlString, listeners, booleansAttributes] = isCallable(template)
-      ? template(context)
-      : template;
-    renderData.eventData.push(...listeners);
-    renderData.attributeData.push(...booleansAttributes);
+    const [htmlString, listeners, booleansAttributes] = normalize(template);
+
+    renderData.eventData.push(...(listeners ?? []));
+    renderData.attributeData.push(...(booleansAttributes ?? []));
     return htmlString;
+  }
+
+  function normalize(template) {
+    const templateResult = isCallable(template) ? template(context) : template;
+
+    if (!Array.isArray(templateResult)) {
+      return [templateResult];
+    }
+    return templateResult;
   }
 
   /*
@@ -67,7 +75,7 @@ export function createRootTemplate(node, template, store) {
     return customHookFn(context);
   }
 
-  function registerEffect(effectFn){
+  function registerEffect(effectFn) {
     renderData.effectData.push(effectFn);
   }
 
