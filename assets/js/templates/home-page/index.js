@@ -1,6 +1,7 @@
 import { html, template } from "../../lib/zip-template/index.js";
 import Photographer from "./Photographer.js";
 import Tag from "../ui/Tag.js";
+import GoToContent from "./GoToContent.js";
 import tagSelection from "../../hooks/tagSelection.js";
 
 function getCenteredClass(photographerNumber) {
@@ -17,7 +18,7 @@ function getCenteredClass(photographerNumber) {
 const HomePage = template(({ render, useStore, use, useEffect }) => {
   const [tags] = useStore(store => store.tags);
 
-  const [isAwayFromTop, setIsAwayFromTop] = useStore(store => store.isAwayFromTop);
+  const [, setIsAwayFromTop] = useStore(store => store.isAwayFromTop);
 
   const { selectedTags, addTag, removeTag } = use(tagSelection());
   const [photographers] = useStore(store => store.photographers);
@@ -29,7 +30,7 @@ const HomePage = template(({ render, useStore, use, useEffect }) => {
   useEffect(() => {
     const homepageHeader = document.getElementById("homepage-header");
     const observer = new IntersectionObserver(entries => {
-      setIsAwayFromTop(entries[0].isIntersecting);
+      setIsAwayFromTop(!entries[0].isIntersecting);
     });
     observer.observe(homepageHeader);
 
@@ -39,7 +40,7 @@ const HomePage = template(({ render, useStore, use, useEffect }) => {
   return html`
     <div id="app">
       <header id="homepage-header">
-        ${!isAwayFromTop && render(html`<a class="scroll-to-top" href="#main-content">Passer au contenu</a>`)}
+        ${render(GoToContent())}
         <a class="home-link" href="">
           <img
             id="fisheye-logo"

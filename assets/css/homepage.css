@@ -95,6 +95,9 @@
   font-weight: 400;
   animation: fade-in 0.3s forwards;
 }
+.scroll-to-top.fade-out {
+  animation: fade-out 0.3s;
+}
 
 @media screen and (min-width: 550px) {
   #fisheye-logo {
@@ -161,5 +164,12 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+    transform: translateY(-100%);
   }
 }
