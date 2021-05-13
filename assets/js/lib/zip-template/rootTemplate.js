@@ -8,23 +8,26 @@ import { createCommandChain } from "./commandChain/index.js";
   Must also receive a store object
 */
 export function createRootTemplate(node, template, store) {
-  const beforeRender = createCommandChain("eventUnregisterer");
+  const beforeRender = createCommandChain("effectCleaner", "eventUnregisterer");
   const afterRender = createCommandChain(
     "tempRefResolver",
     "booleanAttributeHandler",
     "eventRegisterer",
+    "effectRunner",
     "tempRefEraser"
   );
 
   let renderData = {
     eventData: [],
     attributeData: [],
+    effectData: [],
   };
 
   const context = {
     useStore: store.useStore,
     render: renderTemplate,
     use: provideContext,
+    useEffect: registerEffect,
   };
 
   function render() {
@@ -62,6 +65,10 @@ export function createRootTemplate(node, template, store) {
   */
   function provideContext(customHookFn) {
     return customHookFn(context);
+  }
+
+  function registerEffect(effectFn){
+    renderData.effectData.push(effectFn);
   }
 
   store.subscribe({ render });
