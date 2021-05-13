@@ -1,12 +1,6 @@
 import { DiffDOM } from "../diff-dom/index.js";
 import { isCallable } from "./helpers/typeChecker.js";
-import {
-  resolveRefToDomNode,
-  removeListener,
-  eraseTempRefAttribute,
-  registerListener,
-  handleBooleanAttribute,
-} from "./helpers/rootTemplateHelpers.js";
+import { createCommandChain } from "./commandChain/index.js";
 
 /*
   Create a root template, wich is like an entry point for the library.
@@ -14,8 +8,18 @@ import {
   Must also receive a store object
 */
 export function createRootTemplate(node, template, store) {
-  let listenersToRegister = [];
-  let booleanAttributesToHandle = [];
+  const beforeRender = createCommandChain("eventUnregisterer");
+  const afterRender = createCommandChain(
+    "tempRefResolver",
+    "booleanAttributeHandler",
+    "eventRegisterer",
+    "tempRefEraser"
+  );
+
+  let renderData = {
+    eventData: [],
+    attributeData: [],
+  };
 
   const context = {
     useStore: store.useStore,
@@ -24,19 +28,16 @@ export function createRootTemplate(node, template, store) {
   };
 
   function render() {
-    removeTemplatesEventListeners();
+    renderData = beforeRender(renderData);
 
     const domDiffer = new DiffDOM();
     const htmlString = renderTemplate(template);
     const newNode = new DOMParser().parseFromString(htmlString, "text/html");
 
     const diff = domDiffer.diff(node, newNode.body.firstChild);
-
     domDiffer.apply(node, diff);
 
-    handleBooleanAttributes();
-
-    registerTemplatesEventListeners();
+    renderData = afterRender(renderData);
   }
 
   /*
@@ -51,37 +52,16 @@ export function createRootTemplate(node, template, store) {
     const [htmlString, listeners, booleansAttributes] = isCallable(template)
       ? template(context)
       : template;
-    listenersToRegister.push(...listeners);
-    booleanAttributesToHandle.push(...booleansAttributes);
+    renderData.eventData.push(...listeners);
+    renderData.attributeData.push(...booleansAttributes);
     return htmlString;
   }
 
   /*
     Used to provide the context to a function, usefull for custom hooks
   */
-  function provideContext(customHookFn){
+  function provideContext(customHookFn) {
     return customHookFn(context);
-  }
-
-  function registerTemplatesEventListeners() {
-    listenersToRegister = listenersToRegister
-      .map(resolveRefToDomNode)
-      .map(registerListener)
-      .map(eraseTempRefAttribute);
-  }
-
-  function removeTemplatesEventListeners() {
-    listenersToRegister.forEach(removeListener);
-    listenersToRegister = [];
-  }
-
-  function handleBooleanAttributes() {
-    booleanAttributesToHandle = booleanAttributesToHandle
-      .map(resolveRefToDomNode)
-      .map(handleBooleanAttribute)
-      .map(eraseTempRefAttribute);
-
-    booleanAttributesToHandle = [];
   }
 
   store.subscribe({ render });

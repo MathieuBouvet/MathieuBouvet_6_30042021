@@ -1,6 +1,17 @@
 import { BaseHandler } from "./BaseHandler.js";
+import { EventUnregisterer } from "./handlers/EventUnregisterer.js";
+import { TempRefResolver } from "./handlers/TempRefResolver.js";
+import { EventRegisterer } from "./handlers/EventRegisterer.js";
+import { BooleanAttributeHandler } from "./handlers/BooleanAttributeHandler.js";
+import { TempRefEraser } from "./handlers/TempRefEraser.js";
 
-const handlerNameMapping = {};
+const handlerNameMapping = {
+  eventUnregisterer: EventUnregisterer,
+  tempRefResolver: TempRefResolver,
+  eventRegisterer: EventRegisterer,
+  booleanAttributeHandler: BooleanAttributeHandler,
+  tempRefEraser: TempRefEraser,
+};
 
 export function createHandler(name) {
   const SelectedHandler = handlerNameMapping[name];
