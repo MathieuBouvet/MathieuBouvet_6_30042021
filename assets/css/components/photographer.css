@@ -1,0 +1,34 @@
+.photographer-link {
+  text-decoration: none;
+  color: var(--color-primary-2);
+  display: block;
+}
+
+.photographer-portrait {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px 0 #c4c4c4;
+}
+
+.photographer-name {
+  font-size: 3rem;
+  color: var(--color-primary-2);
+  font-weight: lighter;
+}
+
+.photographer-data {
+  display: flex;
+  flex-direction: column;
+}
+
+.photographer-location {
+  color: var(--color-primary-1);
+  font-size: 1.2rem;
+}
+
+.photographer-price {
+  color: #757575;
+  font-size: 0.9rem;
+}

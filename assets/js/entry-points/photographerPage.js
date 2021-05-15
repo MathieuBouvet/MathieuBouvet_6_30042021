@@ -1,5 +1,5 @@
 import { createRootTemplate, createStore } from "../lib/zip-template/index.js";
-import { getPhotographerById } from "../dataLayer.js";
+import { getPhotographerById, getMediaForPhotographer } from "../dataLayer.js";
 import PhotographerPage from "../templates/photographerPage/index.js";
 
 (async () => {
@@ -7,6 +7,7 @@ import PhotographerPage from "../templates/photographerPage/index.js";
 
   const photographerPageData = {
     photographer: await getPhotographerById(Number(photographerId)),
+    media: await getMediaForPhotographer(photographerId),
   };
 
   const store = createStore(photographerPageData);

@@ -1,0 +1,46 @@
+#photographer {
+  margin-top: 10px;
+}
+
+.photographer-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.photographer-info-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.photographer-location {
+  font-size: 1rem;
+}
+
+.photographer-name {
+  font-size: 2rem;
+}
+
+.photographer-data {
+  flex: 1;
+  justify-content: space-between;
+}
+
+.photographer-portrait {
+  --portrait-size: 90px;
+  width: var(--portrait-size);
+  height: var(--portrait-size);
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.photographer-tagline {
+  color: #757575;
+  font-size: 0.9rem;
+}
+
+.tag-list {
+  justify-content: flex-start;
+}
+.tag-label {
+  font-size: 0.9rem;
+}
