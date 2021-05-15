@@ -1,7 +1,15 @@
-const dataRequest = (async () =>
-  fetch("assets/data.json").then(response =>
-    response.json()
-  ))();
+const possibleUrls = ["assets/data.json", "../assets/data.json"];
+
+const requests = possibleUrls.map(url =>
+  fetch(url).then(response => {
+    if (!response.ok) {
+      return Promise.reject();
+    }
+    return response.json();
+  })
+);
+
+const dataRequest = (async () => Promise.any(requests))();
 
 function shallowCopy(object) {
   return { ...object };
