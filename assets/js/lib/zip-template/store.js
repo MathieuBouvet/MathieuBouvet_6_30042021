@@ -15,6 +15,7 @@ export function createStore(initialData = {}) {
   let dataImmutable = toImmutable(initialData); // will block modification attempts, see useStore below for more details
   const dataReferences = wrappedWithRef(initialData); // all data are treated as references, allowing modification by reference. see useStore below for more details
   const subscribers = [];
+  let notificationSent = false;
 
   // subscribe a root template to store data mutations
   function subscribe(subscriber) {
@@ -71,13 +72,19 @@ export function createStore(initialData = {}) {
       const target = selectorFn(dataReferences);
       const previousValue = target[REF_SYMBOL];
 
-      const newValue = isCallable(value) ? value(storeValue) : value;
+      const newValue = isCallable(value)
+        ? value(selectorFn(dataImmutable))
+        : value;
 
       target[REF_SYMBOL] = newValue;
 
-      if (previousValue !== newValue) {
-        dataImmutable = toImmutable(unwrappedOfRefs(dataReferences));
-        _notifySubscribers();
+      dataImmutable = toImmutable(unwrappedOfRefs(dataReferences));
+      if (previousValue !== newValue && !notificationSent) {
+        setTimeout(() => {
+          notificationSent = false;
+          _notifySubscribers();
+        });
+        notificationSent = true;
       }
     };
     return [storeValue, setStoreValue];
