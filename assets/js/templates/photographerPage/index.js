@@ -1,7 +1,10 @@
 import { html, template } from "../../lib/zip-template/index.js";
+import Image from "./Image.js";
 
 const PhotgrapherPage = ({ useStore, render }) => {
   const [photographer] = useStore(store => store.photographer);
+  const [media] = useStore(store => store.media);
+  console.log(media);
   const { name, city, tagline, portrait, country } = photographer;
   return html`<div id="app">
     <header>
@@ -35,8 +38,12 @@ const PhotgrapherPage = ({ useStore, render }) => {
           )}
         </ul>
       </section>
-      <section>
-
+      <section id="media">
+        ${media.map(mediumData => {
+          const mediumTemplate =
+            "image" in mediumData ? Image({ ...mediumData }) : "video";
+          return render(mediumTemplate);
+        })}
       </section>
     </main>
   </div>`;

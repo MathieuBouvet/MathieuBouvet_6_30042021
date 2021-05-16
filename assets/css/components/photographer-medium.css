@@ -1,0 +1,29 @@
+.photographer-medium {
+  margin-top: 15px;
+}
+
+.photographer-medium img {
+  border-radius: 5px;
+  width: 100%;
+  height: calc(0.57 * calc(100vw - 40px));
+  object-fit: cover;
+}
+
+.nudge-down-tiny {
+  object-position: center calc(50% + 60px);
+}
+.nudge-down-medium {
+  object-position: center calc(50% + 100px);
+}
+.nudge-down-big {
+  object-position: center calc(50% + 150px);
+}
+.nudge-up-tiny {
+  object-position: center calc(50% - 50px);
+}
+
+.photographer-medium .medium-title {
+  color: var(--color-primary-1);
+  font-weight: normal;
+  font-size: 1.2rem;
+}
