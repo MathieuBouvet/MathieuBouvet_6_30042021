@@ -2,7 +2,7 @@ import { html, template } from "../../lib/zip-template/index.js";
 import Photographer from "./Photographer.js";
 import Tag from "../ui/Tag.js";
 import GoToContent from "./GoToContent.js";
-import tagSelection from "../../hooks/tagSelection.js";
+import { getTagsFromUrl } from "../helpers.js";
 
 function getCenteredClass(photographerNumber) {
   let centeredClass = "";
@@ -16,11 +16,12 @@ function getCenteredClass(photographerNumber) {
 }
 
 const HomePage = template(({ render, useStore, use, useEffect }) => {
+  const selectedTags = getTagsFromUrl();
+
   const [tags] = useStore(store => store.tags);
 
   const [, setIsAwayFromTop] = useStore(store => store.isAwayFromTop);
 
-  const { selectedTags, addTag, removeTag } = use(tagSelection());
   const [photographers] = useStore(store => store.photographers);
 
   const filteredPhotographers = photographers.filter(photographer =>
@@ -56,9 +57,7 @@ const HomePage = template(({ render, useStore, use, useEffect }) => {
                   ${render(
                     Tag({
                       label: tag,
-                      checked: selectedTags.includes(tag),
-                      onCheck: addTag,
-                      onUncheck: removeTag,
+                      selectedTags,
                     })
                   )}
                 </li>`

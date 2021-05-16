@@ -1,20 +1,21 @@
 import { html, template } from "../../lib/zip-template/index.js";
 
-const Tag = ({ label, id, checked, onCheck, onUncheck }) => {
-  const handleChange = e => {
-    const handler = e.target.checked ? onCheck : onUncheck;
-    handler(label);
-  };
-  const tagId = id ?? `tag-${label}`;
+const Tag = ({ label, selectedTags }) => {
+  const selected = selectedTags.includes(label);
+
+  const tagsIfClicked = selected
+    ? selectedTags.filter(tag => tag !== label)
+    : [...selectedTags, label];
+
+  let url = new URL(window.location);
+  if (tagsIfClicked.length > 0) {
+    url.hash = "tags:" + tagsIfClicked.join(",");
+  } else {
+    url.hash = "tags";
+  }
+
   return html`
-    <input
-      type="checkbox"
-      id="${tagId}"
-      @change=${handleChange}
-      :checked=${checked}
-      class="tag-input sr-only"
-    />
-    <label class="tag-label" for="${tagId}">${label}</label>
+    <a class="tag ${selected && "selected"}" href="${url}">${label}</a>
   `;
 };
 

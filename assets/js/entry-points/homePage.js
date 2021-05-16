@@ -3,10 +3,10 @@ import { getAllTags, getPhotographers } from "../dataLayer.js";
 import HomePage from "../templates/home-page/index.js";
 
 (async () => {
+  
   const homePageInitialData = {
     tags: await getAllTags(),
     photographers: await getPhotographers(),
-    selectedTags: [],
     isAwayFromTop: false,
     goToContentAnimationEnded: true,
   };

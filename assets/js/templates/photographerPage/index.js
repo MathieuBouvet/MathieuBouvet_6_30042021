@@ -34,7 +34,7 @@ const PhotgrapherPage = ({ useStore, render }) => {
         </div>
         <ul class="tag-list">
           ${photographer.tags.map(tag =>
-            render(html`<li class="tag-label">${tag}</li>`)
+            render(html`<li class="tag">${tag}</li>`)
           )}
         </ul>
       </section>

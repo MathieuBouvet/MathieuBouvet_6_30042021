@@ -17,6 +17,8 @@ export function createStore(initialData = {}) {
   const subscribers = [];
   let notificationSent = false;
 
+  window.addEventListener("hashchange", _scheduleNotification);
+
   // subscribe a root template to store data mutations
   function subscribe(subscriber) {
     subscribers.push(subscriber);
@@ -25,6 +27,16 @@ export function createStore(initialData = {}) {
   // unsubscribe a root template
   function unsubscribe(subscriber) {
     subscribers = subscriber.filter(item => item !== subscriber);
+  }
+
+  function _scheduleNotification() {
+    if (!notificationSent) {
+      setTimeout(() => {
+        notificationSent = false;
+        _notifySubscribers();
+      });
+      notificationSent = true;
+    }
   }
 
   function _notifySubscribers() {
@@ -79,12 +91,8 @@ export function createStore(initialData = {}) {
       target[REF_SYMBOL] = newValue;
 
       dataImmutable = toImmutable(unwrappedOfRefs(dataReferences));
-      if (previousValue !== newValue && !notificationSent) {
-        setTimeout(() => {
-          notificationSent = false;
-          _notifySubscribers();
-        });
-        notificationSent = true;
+      if (previousValue !== newValue) {
+        _scheduleNotification();
       }
     };
     return [storeValue, setStoreValue];

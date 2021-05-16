@@ -1,13 +1,14 @@
 import { html, template } from "../../lib/zip-template/index.js";
 import Tag from "../ui/Tag.js";
-import tagSelection from "../../hooks/tagSelection.js";
+import { getTagsFromUrl } from "../helpers.js";
 
 const Photographer = (
   { id, name, portrait, city, tagline, price, tags, country },
   context
 ) => {
-  const { render, use } = context;
-  const { selectedTags, addTag, removeTag } = use(tagSelection());
+  const { render } = context;
+  const selectedTags = getTagsFromUrl();
+
   return html`
     <section class="photographer">
       <a
@@ -36,10 +37,7 @@ const Photographer = (
               ${render(
                 Tag({
                   label: tag,
-                  id: `photographer-${id}-tag-${tag}`,
-                  checked: selectedTags.includes(tag),
-                  onCheck: addTag,
-                  onUncheck: removeTag,
+                  selectedTags,
                 })
               )}
             </li>`

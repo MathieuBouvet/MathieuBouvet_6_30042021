@@ -1,20 +1,16 @@
-.tag-label {
+.tag {
   border: 1px solid #c4c4c4;
   border-radius: 500px;
   padding: 0 5px;
   color: var(--color-primary-1);
   cursor: pointer;
+  text-decoration: none;
 }
-.tag-label::before {
+.tag::before {
   content: "#";
 }
 
-.tag-input:focus ~ .tag-label {
-  outline: 2px solid var(--color-primary-1);
-  outline-offset: 2px;
-}
-
-.tag-input:checked ~ .tag-label {
+.tag.selected {
   background-color: var(--color-primary-1);
   border-color: var(--color-primary-1);
   color: white;
