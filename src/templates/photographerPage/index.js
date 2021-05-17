@@ -1,4 +1,4 @@
-import { html, template } from "../../lib/zip-template/index.js";
+import { html, template } from "../../../lib/zip-template/index.js";
 import Image from "./Image.js";
 
 const PhotgrapherPage = ({ useStore, render }) => {

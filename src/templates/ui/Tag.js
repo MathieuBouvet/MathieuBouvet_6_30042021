@@ -1,4 +1,4 @@
-import { html, template } from "../../lib/zip-template/index.js";
+import { html, template } from "../../../lib/zip-template/index.js";
 
 const Tag = ({ label, selectedTags }) => {
   const selected = selectedTags.includes(label);

@@ -1,4 +1,4 @@
-import { html, template } from "../../lib/zip-template/index.js";
+import { html, template } from "../../../lib/zip-template/index.js";
 
 const GoToContent = ({ useStore, useEffect }) => {
   const [goToContentAnimationEnded, setGoToContentAnimationEnded] = useStore(

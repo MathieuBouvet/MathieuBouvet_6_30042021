@@ -1,4 +1,4 @@
-import { html, template } from "../../lib/zip-template/index.js";
+import { html, template } from "../../../lib/zip-template/index.js";
 
 const Image = ({ id, title, image, likes, position }, context) => {
   return html`<figure class="photographer-medium">

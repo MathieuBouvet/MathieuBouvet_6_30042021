@@ -1,6 +1,6 @@
-import { html, template } from "../../lib/zip-template/index.js";
+import { html, template } from "../../../lib/zip-template/index.js";
 import Tag from "../ui/Tag.js";
-import { getTagsFromUrl } from "../helpers.js";
+import { getTagsFromUrl } from "../../helpers.js";
 
 const Photographer = (
   { id, name, portrait, city, tagline, price, tags, country },

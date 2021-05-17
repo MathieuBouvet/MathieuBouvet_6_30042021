@@ -1,6 +1,6 @@
-import { createRootTemplate, createStore } from "../lib/zip-template/index.js";
-import { getPhotographerById, getMediaForPhotographer } from "../dataLayer.js";
-import PhotographerPage from "../templates/photographerPage/index.js";
+import { createRootTemplate, createStore } from "../../../lib/zip-template/index.js";
+import { getPhotographerById, getMediaForPhotographer } from "../../src/dataLayer.js";
+import PhotographerPage from "../../src/templates/photographerPage/index.js";
 
 (async () => {
   const photographerId = new URLSearchParams(window.location.search).get("id");

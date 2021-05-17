@@ -1,8 +1,8 @@
-import { html, template } from "../../lib/zip-template/index.js";
+import { html, template } from "../../../lib/zip-template/index.js";
 import Photographer from "./Photographer.js";
 import Tag from "../ui/Tag.js";
 import GoToContent from "./GoToContent.js";
-import { getTagsFromUrl } from "../helpers.js";
+import { getTagsFromUrl } from "../../helpers.js";
 
 function getCenteredClass(photographerNumber) {
   let centeredClass = "";
