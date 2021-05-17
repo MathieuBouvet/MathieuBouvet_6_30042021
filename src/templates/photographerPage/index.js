@@ -21,10 +21,10 @@ const PhotgrapherPage = ({ useStore, render }) => {
         <div class="photographer-container">
           <div class="photographer-info-wrapper">
             <h1 class="photographer-name">${name}</h1>
-            <p class="photographer-data">
-              <span class="photographer-location">${city}, ${country}</span>
-              <span class="photographer-tagline">${tagline}</span>
-            </p>
+            <div class="photographer-data">
+              <p class="photographer-location">${city}, ${country}</p>
+              <p class="photographer-tagline">${tagline}</p>
+            </div>
           </div>
           <img
             class="photographer-portrait"

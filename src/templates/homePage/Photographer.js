@@ -25,11 +25,11 @@ const Photographer = (
           <figcaption><h2 class="photographer-name">${name}</h2></figcaption>
         </figure>
       </a>
-      <p class="photographer-data">
-        <span class="photographer-location">${city}, ${country}</span>
-        <span class="photgrapher-tagline">${tagline}</span>
-        <span class="photographer-price">${price}€/jour</span>
-      </p>
+      <div class="photographer-data">
+        <P class="photographer-location">${city}, ${country}</P>
+        <P class="photgrapher-tagline">${tagline}</P>
+        <P class="photographer-price">${price}€/jour</P>
+      </div>
       <ul class="tag-list">
         ${tags.map(tag =>
           render(
