@@ -1,11 +1,20 @@
 import { html, template } from "../../../lib/zip-template/index.js";
 import Image from "./Image.js";
+import Tag from "../ui/Tag.js";
+import { getTagsFromUrl } from "../../helpers/urlHash.js";
 
 const PhotgrapherPage = ({ useStore, render }) => {
   const [photographer] = useStore(store => store.photographer);
   const [media] = useStore(store => store.media);
 
+  const selectedTags = getTagsFromUrl();
+
+  const filteredMedia = Object.values(media).filter(medium =>
+    selectedTags.every(selectedTag => medium.tags.includes(selectedTag))
+  );
+
   const { name, city, tagline, portrait, country } = photographer;
+  
   return html`<div id="app">
     <header>
       <a class="home-link" href="..">
@@ -39,16 +48,22 @@ const PhotgrapherPage = ({ useStore, render }) => {
         </div>
         <ul class="tag-list">
           ${photographer.tags.map(tag =>
-            render(html`<li class="tag">${tag}</li>`)
+            render(
+              html`<li>
+                ${render(Tag({ label: tag, selectedTags, replaceMode: true }))}
+              </li>`
+            )
           )}
         </ul>
       </section>
       <section id="media">
-        ${Object.values(media).map(mediumData => {
+        ${filteredMedia.map(mediumData => {
           const mediumTemplate =
             "image" in mediumData ? Image(mediumData) : "video";
           return render(mediumTemplate);
         })}
+        ${filteredMedia.length === 0 &&
+        render(html`<p class="no-result-info">Aucun media</p>`)}
       </section>
     </main>
   </div>`;

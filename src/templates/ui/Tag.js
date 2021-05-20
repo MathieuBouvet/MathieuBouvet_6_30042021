@@ -1,11 +1,11 @@
 import { html, template } from "../../../lib/zip-template/index.js";
 
-const Tag = ({ label, selectedTags }) => {
+const Tag = ({ label, selectedTags, replaceMode = false }) => {
   const selected = selectedTags.includes(label);
 
   const tagsIfClicked = selected
     ? selectedTags.filter(tag => tag !== label)
-    : [...selectedTags, label];
+    : [...(!replaceMode ? selectedTags : []), label];
 
   let url = new URL(window.location);
   if (tagsIfClicked.length > 0) {
@@ -19,7 +19,9 @@ const Tag = ({ label, selectedTags }) => {
       class="tag ${selected && "selected"}"
       href="${url}"
       aria-label="${label}"
-      aria-description="${selected ? "retire" : "ajoute"} le tag de la liste des filtres"
+      aria-description="${selected
+        ? "retire"
+        : "ajoute"} le tag de la liste des filtres"
     >
       ${label}
     </a>
