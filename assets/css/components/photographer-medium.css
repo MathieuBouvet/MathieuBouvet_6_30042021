@@ -27,3 +27,27 @@
   font-weight: normal;
   font-size: 1.2rem;
 }
+
+.medium-info {
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-primary-1);
+}
+
+.likes {
+  margin-left: auto;
+}
+
+.like-button {
+  border: none;
+  background-color: transparent;
+  color: var(--color-primary-1);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.like-icon.empty:before {
+  font-weight: normal;
+}

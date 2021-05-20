@@ -37,7 +37,21 @@ export async function getMediaForPhotographer(photographerId) {
   const data = await dataRequest;
   return data.media
     .filter(medium => medium.photographerId === Number(photographerId))
-    .map(adjustImagePosition);
+    .map(adjustImagePosition)
+    .map(addLikedAttribute)
+    .reduce(mapById, {});
+}
+
+function mapById(map, medium) {
+  map[medium.id] = medium;
+  return map;
+}
+
+function addLikedAttribute(medium) {
+  return {
+    ...medium,
+    liked: false,
+  };
 }
 
 function adjustImagePosition(medium) {
@@ -73,5 +87,5 @@ const imagePositionAdjustements = {
   ["925-87367293"]: "nudge-down-big",
   // Marcel Nikolic
   ["195-356234343"]: "nudge-up-tiny",
-  ["195-6525666253"]: "nudge-up-tiny"
+  ["195-6525666253"]: "nudge-up-tiny",
 };
