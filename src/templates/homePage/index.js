@@ -2,7 +2,7 @@ import { html, template } from "../../../lib/zip-template/index.js";
 import Photographer from "./Photographer.js";
 import Tag from "../ui/Tag.js";
 import GoToContent from "./GoToContent.js";
-import { getTagsFromUrl } from "../../helpers.js";
+import { getTagsFromUrl, getHashParams, getHashString } from "../../helpers/urlHash.js";
 
 function getCenteredClass(photographerNumber) {
   let centeredClass = "";
@@ -27,6 +27,9 @@ const HomePage = template(({ render, useStore, use, useEffect }) => {
   const filteredPhotographers = photographers.filter(photographer =>
     selectedTags.every(selectedTag => photographer.tags.includes(selectedTag))
   );
+
+  const hashParams = getHashParams(window.location);
+  hashParams["main-content"] = [];
 
   useEffect(() => {
     const homepageHeader = document.getElementById("homepage-header");
@@ -67,8 +70,8 @@ const HomePage = template(({ render, useStore, use, useEffect }) => {
         </nav>
       </header>
       <main
-        id="main-content"
-        class="${getCenteredClass(filteredPhotographers.length)}"
+        id="${getHashString(hashParams)}"
+        class="main-content ${getCenteredClass(filteredPhotographers.length)}"
       >
         <h1 id="app-title">Nos Photographes</h1>
         ${filteredPhotographers.map(photographer =>

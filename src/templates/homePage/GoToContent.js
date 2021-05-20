@@ -1,4 +1,5 @@
 import { html, template } from "../../../lib/zip-template/index.js";
+import { getHashString, getHashParams } from "../../helpers/urlHash.js";
 
 const GoToContent = ({ useStore, useEffect }) => {
   const [goToContentAnimationEnded, setGoToContentAnimationEnded] = useStore(
@@ -12,6 +13,9 @@ const GoToContent = ({ useStore, useEffect }) => {
     }
   });
 
+  const hashParams = getHashParams(window.location);
+  hashParams["main-content"] = [];
+
   return (
     (isAwayFromTop || !goToContentAnimationEnded) &&
     html` <div
@@ -22,7 +26,9 @@ const GoToContent = ({ useStore, useEffect }) => {
         }
       }}
     >
-      <a class="scroll-to-top" href="#main-content"> Passer au contenu </a>
+      <a class="scroll-to-top" href="#${getHashString(hashParams)}">
+        Passer au contenu
+      </a>
     </div>`
   );
 };

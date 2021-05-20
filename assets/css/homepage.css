@@ -18,7 +18,7 @@
   width: 150px;
 }
 
-#main-content {
+.main-content {
   scroll-margin-top: 55px;
 }
 
@@ -78,14 +78,14 @@
     font-size: 1.5rem;
   }
 
-  #main-content {
+  .main-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     scroll-margin-top: 16px;
   }
 
-  #main-content.centered-medium {
+  .main-content.centered-medium {
     justify-content: center;
   }
 
@@ -111,7 +111,7 @@
     font-size: 2rem;
   }
 
-  #main-content.centered-large {
+  .main-content.centered-large {
     justify-content: center;
   }
 
