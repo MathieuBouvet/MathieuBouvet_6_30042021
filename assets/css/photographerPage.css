@@ -6,6 +6,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  gap: 35px;
 }
 
 .photographer-info-wrapper {
@@ -68,6 +69,15 @@
   font-size: 1rem;
 }
 
+.restrained {
+  max-width: 1245px;
+  margin: auto;
+}
+
+.home-link {
+  margin-left: 0;
+}
+
 @media screen and (min-width: 550px) {
   #photographer {
     background-color: var(--color-foundation-2);
@@ -81,11 +91,11 @@
     width: auto;
     align-self: flex-start;
     margin-top: 10px;
+    flex-shrink: 0;
   }
 
   .contact-button {
     height: 45px;
-    flex-shrink: 0;
   }
 
   .photographer-portrait {
@@ -96,17 +106,16 @@
     display: flex;
     flex-wrap: wrap;
     gap: 95px;
-    justify-content: space-between;
+    justify-content: center;
   }
 
   .medium {
     width: 350px;
     height: 300px;
   }
-
 }
-@media screen and (min-width: 700px) {
-  .contact-button-wrapper {
-    margin-left: 35px;
+@media screen and (min-width: 1100px) {
+  .photographer-portrait {
+    --portrait-size: 180px;
   }
 }

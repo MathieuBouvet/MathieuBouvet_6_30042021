@@ -14,9 +14,9 @@ const PhotgrapherPage = ({ useStore, render }) => {
   );
 
   const { name, city, tagline, portrait, country } = photographer;
-  
+
   return html`<div id="app">
-    <header>
+    <header class="restrained">
       <a class="home-link" href="..">
         <img
           id="fisheye-logo"
@@ -26,7 +26,7 @@ const PhotgrapherPage = ({ useStore, render }) => {
       </a>
     </header>
     <main>
-      <section id="photographer">
+      <section id="photographer" class="restrained">
         <div class="photographer-container">
           <div class="photographer-info-wrapper">
             <h1 class="photographer-name">${name}</h1>
