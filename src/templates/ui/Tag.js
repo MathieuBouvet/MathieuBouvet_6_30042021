@@ -19,9 +19,6 @@ const Tag = ({ label, selectedTags, replaceMode = false }) => {
       class="tag ${selected && "selected"}"
       href="${url}"
       aria-label="${label}"
-      aria-description="${selected
-        ? "retire"
-        : "ajoute"} le tag de la liste des filtres"
     >
       ${label}
     </a>
