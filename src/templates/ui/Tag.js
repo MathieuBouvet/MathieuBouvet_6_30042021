@@ -15,7 +15,14 @@ const Tag = ({ label, selectedTags }) => {
   }
 
   return html`
-    <a class="tag ${selected && "selected"}" href="${url}">${label}</a>
+    <a
+      class="tag ${selected && "selected"}"
+      href="${url}"
+      aria-label="${label}"
+      aria-description="${selected ? "retire" : "ajoute"} le tag de la liste des filtres"
+    >
+      ${label}
+    </a>
   `;
 };
 

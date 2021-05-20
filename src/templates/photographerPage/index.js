@@ -26,6 +26,11 @@ const PhotgrapherPage = ({ useStore, render }) => {
               <p class="photographer-tagline">${tagline}</p>
             </div>
           </div>
+          <div class="contact-button-wrapper">
+            <button aria-label="contact me" class="contact-button">
+              Contactez-moi
+            </button>
+          </div>
           <img
             class="photographer-portrait"
             src="../assets/images/photographers/small-${portrait}"

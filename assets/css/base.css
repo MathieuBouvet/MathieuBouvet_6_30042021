@@ -17,6 +17,9 @@ html {
   font-size: 100%;
   scroll-behavior: smooth;
 }
+button {
+  font-family: "DM Sans", sans-serif;
+}
 
 body {
   margin: 0;

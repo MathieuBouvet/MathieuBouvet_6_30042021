@@ -14,17 +14,16 @@ const GoToContent = ({ useStore, useEffect }) => {
 
   return (
     (isAwayFromTop || !goToContentAnimationEnded) &&
-    html` <a
-      class="scroll-to-top ${!isAwayFromTop && "fade-out"}"
-      href="#main-content"
+    html` <div
+      class="scroll-top-link-wrapper ${!isAwayFromTop && "fade-out"}"
       @animationend=${e => {
         if (e.animationName === "fade-out") {
           setGoToContentAnimationEnded(true);
         }
       }}
     >
-      Passer au contenu
-    </a>`
+      <a class="scroll-to-top" href="#main-content"> Passer au contenu </a>
+    </div>`
   );
 };
 

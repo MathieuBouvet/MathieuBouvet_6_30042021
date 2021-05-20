@@ -40,29 +40,32 @@
   margin-top: 55px;
 }
 
-
 .no-result-info {
   text-align: center;
   margin: 55px auto;
   color: #757575;
 }
 
-.scroll-to-top {
+.scroll-top-link-wrapper {
   position: fixed;
-  display: block;
   top: 15px;
-  left: calc(50% - 74px);
-  margin: auto;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  animation: fade-in 0.3s forwards;
+}
+
+.scroll-top-link-wrapper.fade-out {
+  animation: fade-out 0.3s forwards;
+}
+
+.scroll-to-top {
   text-decoration: none;
   background-color: var(--color-foundation-1);
   border-radius: 5px;
   padding: 3px 6px;
   color: black;
-  font-weight: 400;
-  animation: fade-in 0.3s forwards;
-}
-.scroll-to-top.fade-out {
-  animation: fade-out 0.3s forwards;
 }
 
 @media screen and (min-width: 550px) {
