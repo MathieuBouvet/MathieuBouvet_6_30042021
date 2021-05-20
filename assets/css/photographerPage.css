@@ -5,6 +5,7 @@
 .photographer-container {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
 }
 
 .photographer-info-wrapper {
@@ -65,4 +66,47 @@
   padding: 5px 18px;
   border-radius: 5px;
   font-size: 1rem;
+}
+
+@media screen and (min-width: 550px) {
+  #photographer {
+    background-color: var(--color-foundation-2);
+    border-radius: 5px;
+    padding: 25px;
+  }
+
+  .contact-button-wrapper {
+    position: static;
+    margin-right: auto;
+    width: auto;
+    align-self: flex-start;
+    margin-top: 10px;
+  }
+
+  .contact-button {
+    height: 45px;
+    flex-shrink: 0;
+  }
+
+  .photographer-portrait {
+    --portrait-size: 140px;
+  }
+
+  #media {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 95px;
+    justify-content: space-between;
+  }
+
+  .medium {
+    width: 350px;
+    height: 300px;
+  }
+
+}
+@media screen and (min-width: 700px) {
+  .contact-button-wrapper {
+    margin-left: 35px;
+  }
 }

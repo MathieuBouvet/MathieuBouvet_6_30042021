@@ -1,5 +1,5 @@
 import { html, template } from "../../../lib/zip-template/index.js";
-import Image from "./Image.js";
+import Medium from "./Medium.js";
 import Tag from "../ui/Tag.js";
 import { getTagsFromUrl } from "../../helpers/urlHash.js";
 
@@ -58,9 +58,7 @@ const PhotgrapherPage = ({ useStore, render }) => {
       </section>
       <section id="media">
         ${filteredMedia.map(mediumData => {
-          const mediumTemplate =
-            "image" in mediumData ? Image(mediumData) : "video";
-          return render(mediumTemplate);
+          return render(Medium(mediumData));
         })}
         ${filteredMedia.length === 0 &&
         render(html`<p class="no-result-info">Aucun media</p>`)}
