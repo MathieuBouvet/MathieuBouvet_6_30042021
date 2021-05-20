@@ -4,7 +4,8 @@ const Image = ({ image, position }) => {
   return html`<img
     src="${`../assets/images/photographers-pictures/medium_${image}`}"
     alt=""
-    class="medium ${position !== "default" && position}"
+    class="medium"
+    style="${position !== "default" && `object-position: center ${position}%`}"
   />`;
 };
 

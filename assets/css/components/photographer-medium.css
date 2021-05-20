@@ -5,7 +5,7 @@
 .medium {
   border-radius: 5px;
   width: 100%;
-  height: calc(0.57 * calc(100vw - 40px));
+  height: calc(0.85 * calc(100vw - 40px));
   object-fit: cover;
 }
 
@@ -24,19 +24,6 @@
   align-items: center;
   justify-content: center;
   text-shadow: 0 0 10px black;
-}
-
-.nudge-down-tiny {
-  object-position: center calc(50% + 60px);
-}
-.nudge-down-medium {
-  object-position: center calc(50% + 100px);
-}
-.nudge-down-big {
-  object-position: center calc(50% + 150px);
-}
-.nudge-up-tiny {
-  object-position: center calc(50% - 50px);
 }
 
 .photographer-medium .medium-title {

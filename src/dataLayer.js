@@ -66,26 +66,26 @@ function adjustImagePosition(medium) {
 
 const imagePositionAdjustements = {
   // Mimi Keel
-  ["243-2525345343"]: "nudge-down-tiny",
-  ["243-398847109"]: "nudge-down-medium",
-  ["243-95234343"]: "nudge-down-tiny",
+  ["243-2525345343"]: 10,
+  ["243-398847109"]: 10,
+  ["243-95234343"]: 10,
   // Ellie-Rose Wilkens
-  ["930-235234343"]: "nudge-up-tiny",
-  ["930-7775342343"]: "nudge-up-tiny",
-  ["930-22299394"]: "nudge-down-medium",
+  ["930-235234343"]: 10,
+  ["930-7775342343"]: 10,
+  ["930-22299394"]: 10,
   // Tracy Galindo
-  ["82-342550"]: "nudge-down-medium",
-  ["82-9025895"]: "nudge-down-medium",
+  ["82-342550"]: 10,
+  ["82-9025895"]: 10,
   // Nabeel Bradford
-  ["527-92352352"]: "nudge-up-tiny",
-  ["527-23523533"]: "nudge-down-tiny",
-  ["527-525834234"]: "nudge-up-tiny",
+  ["527-92352352"]: 10,
+  ["527-23523533"]: 10,
+  ["527-525834234"]: 10,
   // Rhode Dubois
-  ["925-92758372"]: "nudge-down-medium",
-  ["925-32958383"]: "nudge-down-medium",
-  ["925-23394384"]: "nudge-down-tiny",
-  ["925-87367293"]: "nudge-down-big",
+  ["925-92758372"]: 10,
+  ["925-32958383"]: 10,
+  ["925-23394384"]: 10,
+  ["925-87367293"]: 10,
   // Marcel Nikolic
-  ["195-356234343"]: "nudge-up-tiny",
-  ["195-6525666253"]: "nudge-up-tiny",
+  ["195-356234343"]: 10,
+  ["195-6525666253"]: 10,
 };

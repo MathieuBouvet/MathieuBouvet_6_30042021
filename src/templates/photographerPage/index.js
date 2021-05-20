@@ -2,10 +2,12 @@ import { html, template } from "../../../lib/zip-template/index.js";
 import Medium from "./Medium.js";
 import Tag from "../ui/Tag.js";
 import { getTagsFromUrl } from "../../helpers/urlHash.js";
+import { sortFns } from "../../helpers/sortMedia.js";
 
-const PhotgrapherPage = ({ useStore, render }) => {
+const PhotgrapherPage = ({ useStore, render, useEffect }) => {
   const [photographer] = useStore(store => store.photographer);
   const [media] = useStore(store => store.media);
+  const [sortBy, setSortBy] = useStore(store => store.mediaFilter);
 
   const selectedTags = getTagsFromUrl();
 
@@ -13,10 +15,12 @@ const PhotgrapherPage = ({ useStore, render }) => {
     selectedTags.every(selectedTag => medium.tags.includes(selectedTag))
   );
 
+  filteredMedia.sort(sortFns[sortBy]);
+
   const { name, city, tagline, portrait, country } = photographer;
 
   return html`<div id="app">
-    <header class="restrained">
+    <header>
       <a class="home-link" href="..">
         <img
           id="fisheye-logo"
@@ -26,7 +30,7 @@ const PhotgrapherPage = ({ useStore, render }) => {
       </a>
     </header>
     <main>
-      <section id="photographer" class="restrained">
+      <section id="photographer">
         <div class="photographer-container">
           <div class="photographer-info-wrapper">
             <h1 class="photographer-name">${name}</h1>
@@ -56,6 +60,16 @@ const PhotgrapherPage = ({ useStore, render }) => {
           )}
         </ul>
       </section>
+      <div class="sort-media-container">
+        <label for="sort-media">Trier par :</label>
+        <select id="sort-media" @change=${e => setSortBy(e.target.value)}>
+          <option value="popularity" :selected=${sortBy === "popularity"}>
+            Popularité
+          </option>
+          <option value="date" :selected=${sortBy === "date"}>Date</option>
+          <option value="title" :selected=${sortBy === "title"}>Titre</option>
+        </select>
+      </div>
       <section id="media">
         ${filteredMedia.map(mediumData => {
           return render(Medium(mediumData));
