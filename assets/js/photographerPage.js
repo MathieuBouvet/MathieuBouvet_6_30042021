@@ -1,7 +1,7 @@
 import {
   createRootTemplate,
   createStore,
-} from "../../../lib/zip-template/index.js";
+} from "../../lib/zip-template/index.js";
 import {
   getPhotographerById,
   getMediaForPhotographer,
