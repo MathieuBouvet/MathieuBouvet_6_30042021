@@ -17,7 +17,11 @@ const PhotgrapherPage = ({ useStore, render, useEffect }) => {
 
   filteredMedia.sort(sortFns[sortBy]);
 
-  const { name, city, tagline, portrait, country } = photographer;
+  const { name, city, tagline, portrait, country, price } = photographer;
+
+  const totalLikes = Object.values(media).reduce((totalLikes, medium) => {
+    return totalLikes + medium.likes + medium.liked;
+  }, 0);
 
   return html`<div id="app">
     <header>
@@ -49,6 +53,14 @@ const PhotgrapherPage = ({ useStore, render, useEffect }) => {
             src="../assets/images/photographers/small-${portrait}"
             alt="${name}"
           />
+        </div>
+        <div class="additional-info">
+          <p>
+            ${totalLikes.toLocaleString()}
+            <i class="fa fa-heart"></i>
+            <span class="sr-only">likes</span>
+          </p>
+          <p>${price}€ / jour</p>
         </div>
         <ul class="tag-list">
           ${photographer.tags.map(tag =>

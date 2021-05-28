@@ -86,6 +86,16 @@
   border-radius: 5px;
 }
 
+.additional-info {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 25px;
+  background-color: var(--color-foundation-1);
+  border-radius: 5px 5px 0 0;
+  padding: 10px;
+}
+
 @media screen and (min-width: 550px) {
   #media {
     display: flex;
@@ -134,6 +144,12 @@
 
   .sort-media-container {
     display: initial;
+  }
+
+  .additional-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
   }
 }
 @media screen and (min-width: 1100px) {
