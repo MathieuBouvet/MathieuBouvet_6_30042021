@@ -9,7 +9,6 @@ const Medium = (
   const { useStore, render } = context;
   const [_, setLiked] = useStore(store => store.media[id].liked);
   const likesCount = likes + (liked ? 1 : 0);
-  console.log(title, id);
   return html`<figure class="photographer-medium">
     ${image != null && render(Image({ image, position }))}
     ${video != null && render(Video({ video }))}
