@@ -33,9 +33,39 @@ h1 {
 h2 {
   margin: 0;
 }
+
 p,
 figure {
   margin: 0;
+}
+
+.field-group:not(:last-child) {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  color: #312E2E;
+}
+
+.field-group label {
+  margin-bottom: 2px;
+}
+
+.field {
+  border: none;
+  padding: 9px;
+  border-radius: 5px;
+}
+
+.textarea-field {
+  height: 75px;
+}
+
+.main-button {
+  color: white;
+  background-color: var(--color-primary-1);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .sr-only {

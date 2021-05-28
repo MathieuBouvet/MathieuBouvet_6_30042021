@@ -15,6 +15,10 @@ import PhotographerPage from "../../src/templates/photographerPage/index.js";
     photographer: await getPhotographerById(Number(photographerId)),
     media: await getMediaForPhotographer(photographerId),
     mediaFilter: "popularity",
+    contactModal: {
+      isOpened: false,
+      isClosing: false,
+    },
   };
 
   const store = createStore(photographerPageData);

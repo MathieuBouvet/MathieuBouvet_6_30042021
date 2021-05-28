@@ -3,11 +3,15 @@ import Medium from "./Medium.js";
 import Tag from "../ui/Tag.js";
 import { getTagsFromUrl } from "../../helpers/urlHash.js";
 import { sortFns } from "../../helpers/sortMedia.js";
+import ContactModale from "./ContactModal.js";
 
-const PhotgrapherPage = ({ useStore, render, useEffect }) => {
+const PhotgrapherPage = ({ useStore, render }) => {
   const [photographer] = useStore(store => store.photographer);
   const [media] = useStore(store => store.media);
   const [sortBy, setSortBy] = useStore(store => store.mediaFilter);
+  const [isContactModalOpen, setContactModalOpen] = useStore(
+    store => store.contactModal.isOpened
+  );
 
   const selectedTags = getTagsFromUrl();
 
@@ -24,7 +28,7 @@ const PhotgrapherPage = ({ useStore, render, useEffect }) => {
   }, 0);
 
   return html`<div id="app">
-    <header>
+    <header aria-hidden="${isContactModalOpen.toString()}">
       <a class="home-link" href="..">
         <img
           id="fisheye-logo"
@@ -33,7 +37,7 @@ const PhotgrapherPage = ({ useStore, render, useEffect }) => {
         />
       </a>
     </header>
-    <main>
+    <main aria-hidden="${isContactModalOpen.toString()}">
       <section id="photographer">
         <div class="photographer-container">
           <div class="photographer-info-wrapper">
@@ -44,7 +48,11 @@ const PhotgrapherPage = ({ useStore, render, useEffect }) => {
             </div>
           </div>
           <div class="contact-button-wrapper">
-            <button aria-label="contact me" class="contact-button">
+            <button
+              aria-label="contact me"
+              class="contact-button main-button"
+              @click=${() => setContactModalOpen(true)}
+            >
               Contactez-moi
             </button>
           </div>
@@ -90,6 +98,7 @@ const PhotgrapherPage = ({ useStore, render, useEffect }) => {
         render(html`<p class="no-result-info">Aucun media</p>`)}
       </section>
     </main>
+    ${isContactModalOpen && render(ContactModale({ photographerName: name }))}
   </div>`;
 };
 
