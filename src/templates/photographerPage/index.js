@@ -24,7 +24,8 @@ const PhotgrapherPage = ({ useStore, render }) => {
 
   filteredMedia.sort(sortFns[sortBy]);
 
-  const { name, city, tagline, portrait, country, price } = photographer;
+  const { name, city, tagline, portrait, country, price, dominantColor } =
+    photographer;
 
   const totalLikes = Object.values(media).reduce((totalLikes, medium) => {
     return totalLikes + medium.likes + medium.liked;
@@ -67,6 +68,7 @@ const PhotgrapherPage = ({ useStore, render }) => {
               placeholderSrc: `../assets/images/profile-pictures/low-res/${portrait}`,
               isLoaded,
               onLoad: () => setLoaded(true),
+              dominantColor,
             })
           )}
         </div>

@@ -2,7 +2,10 @@ import { html, template } from "../../../lib/zip-template/index.js";
 import Image from "../ui/Image.js";
 import Video from "./Video.js";
 
-const Medium = ({ id, title, image, video, likes, liked }, context) => {
+const Medium = (
+  { id, title, image, video, likes, liked, dominantColor },
+  context
+) => {
   const { useStore, render } = context;
   const [_, setLiked] = useStore(store => store.media[id].liked);
   const likesCount = likes + (liked ? 1 : 0);
@@ -21,6 +24,7 @@ const Medium = ({ id, title, image, video, likes, liked }, context) => {
         src: "../assets/images/photographers-pictures/medium/" + image,
         placeholderSrc:
           "../assets/images/photographers-pictures/low-res/" + image,
+        dominantColor,
       })
     )}
     ${video != null && render(Video({ video }))}

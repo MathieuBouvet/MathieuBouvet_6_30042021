@@ -4,7 +4,7 @@ import Image from "../ui/Image.js";
 import { getTagsFromUrl } from "../../helpers/urlHash.js";
 
 const Photographer = (
-  { id, name, portrait, city, tagline, price, tags, country },
+  { id, name, portrait, city, tagline, price, tags, country, dominantColor },
   context
 ) => {
   const { render, useStore } = context;
@@ -28,6 +28,7 @@ const Photographer = (
               placeholderSrc: `assets/images/profile-pictures/low-res/${portrait}`,
               isLoaded,
               onLoad: () => setLoaded(true),
+              dominantColor,
             })
           )}
           <figcaption><h2 class="photographer-name">${name}</h2></figcaption>

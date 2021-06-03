@@ -54,6 +54,7 @@
   display: flex;
   justify-content: center;
   animation: fade-in 0.3s forwards;
+  z-index: 1;
 }
 
 .scroll-top-link-wrapper.fade-out {

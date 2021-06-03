@@ -7,6 +7,7 @@ const Image = ({
   isLoaded,
   onLoad,
   className,
+  dominantColor,
 }) => {
   return html`<div class="image-container">
     <img
@@ -20,6 +21,7 @@ const Image = ({
       class="low-res-image ${isLoaded && "hidden"} ${className}"
       src="${placeholderSrc}"
       alt="${altText}"
+      style="background-color: ${dominantColor}"
     />
   </div> `;
 };
