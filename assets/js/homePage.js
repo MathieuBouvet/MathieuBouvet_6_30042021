@@ -2,7 +2,8 @@ import {
   createRootTemplate,
   createStore,
 } from "../../lib/zip-template/index.js";
-import { getAllTags, getPhotographers } from "../../src/dataLayer.js";
+import { getAllTags, getPhotographers } from "../../src/dataLayer/requests.js";
+
 import HomePage from "../../src/templates/homePage/index.js";
 
 (async () => {

@@ -5,7 +5,7 @@ import {
 import {
   getPhotographerById,
   getMediaForPhotographer,
-} from "../../src/dataLayer.js";
+} from "../../src/dataLayer/requests.js";
 import PhotographerPage from "../../src/templates/photographerPage/index.js";
 
 (async () => {
