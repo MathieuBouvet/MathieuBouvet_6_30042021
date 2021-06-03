@@ -12,7 +12,7 @@ const ContactModal = ({ photographerName }, context) => {
   const onSubmit = e => {
     e.preventDefault();
     const data = new FormData(e.target);
-    console.log(Object.fromEntries(data.entries()));
+    
     closeModale();
   };
 

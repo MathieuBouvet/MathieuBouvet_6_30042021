@@ -1,16 +1,28 @@
 import { html, template } from "../../../lib/zip-template/index.js";
-import Image from "./Image.js";
+import Image from "../ui/Image.js";
 import Video from "./Video.js";
 
-const Medium = (
-  { id, title, image, video, likes, position, liked },
-  context
-) => {
+const Medium = ({ id, title, image, video, likes, liked }, context) => {
   const { useStore, render } = context;
   const [_, setLiked] = useStore(store => store.media[id].liked);
   const likesCount = likes + (liked ? 1 : 0);
+
+  const [isLoaded, setLoaded] = useStore(store => store.loadedMediumImage[id]);
+  const onLoad = () => setLoaded(true);
+
   return html`<figure class="photographer-medium">
-    ${image != null && render(Image({ image, position }))}
+    ${image != null &&
+    render(
+      Image({
+        image,
+        isLoaded,
+        onLoad,
+        className: "medium",
+        src: "../assets/images/photographers-pictures/medium/" + image,
+        placeholderSrc:
+          "../assets/images/photographers-pictures/low-res/" + image,
+      })
+    )}
     ${video != null && render(Video({ video }))}
     <figcaption class="medium-info">
       <h2 class="medium-title">${title}</h2>

@@ -1,5 +1,6 @@
 import { html, template } from "../../../lib/zip-template/index.js";
 import Medium from "./Medium.js";
+import Image from "../ui/Image.js";
 import Tag from "../ui/Tag.js";
 import { getTagsFromUrl } from "../../helpers/urlHash.js";
 import { sortFns } from "../../helpers/sortMedia.js";
@@ -18,6 +19,8 @@ const PhotgrapherPage = ({ useStore, render }) => {
   const filteredMedia = Object.values(media).filter(medium =>
     selectedTags.every(selectedTag => medium.tags.includes(selectedTag))
   );
+
+  const [isLoaded, setLoaded] = useStore(store => store.loadedProfilePic);
 
   filteredMedia.sort(sortFns[sortBy]);
 
@@ -56,11 +59,16 @@ const PhotgrapherPage = ({ useStore, render }) => {
               Contactez-moi
             </button>
           </div>
-          <img
-            class="photographer-portrait"
-            src="../assets/images/photographers/small-${portrait}"
-            alt="${name}"
-          />
+          ${render(
+            Image({
+              className: "photographer-portrait",
+              altText: name,
+              src: `../assets/images/profile-pictures/small/${portrait}`,
+              placeholderSrc: `../assets/images/profile-pictures/low-res/${portrait}`,
+              isLoaded,
+              onLoad: () => setLoaded(true),
+            })
+          )}
         </div>
         <div class="additional-info">
           <p>
