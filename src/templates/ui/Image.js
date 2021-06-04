@@ -13,8 +13,9 @@ const Image = ({
     <img
       src="${src}"
       alt="${altText}"
-      class="full-res-image ${className}"
+      class="full-res-image ${className} ${!isLoaded && "hidden"}"
       @load=${onLoad}
+      style="background-color: ${dominantColor}"
     />
     <img
       aria-hidden="true"

@@ -1,0 +1,36 @@
+#lightbox-modal:focus {
+  outline: none;
+}
+
+#lightbox-modal.modal-content {
+  background-color: white;
+}
+
+.lightbox-content-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.lightbox-image {
+  border-radius: 5px;
+  width: 1000px;
+  height: 880px;
+  object-fit: contain;
+}
+
+.lightbox-button {
+  color: var(--color-primary-1);
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 15px;
+}
+.lightbox-button:hover {
+  color: var(--color-primary-2);
+}
+
+.lightbox-medium-title {
+  color: var(--color-primary-1);
+  font-size: 1.2rem;
+}

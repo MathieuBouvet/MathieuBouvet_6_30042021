@@ -5,24 +5,21 @@ import Tag from "../ui/Tag.js";
 import { getTagsFromUrl } from "../../helpers/urlHash.js";
 import { sortFns } from "../../helpers/sortMedia.js";
 import ContactModale from "./ContactModal.js";
+import LightboxModal from "./LightboxModal.js";
+import getMatchingMedia from "../../hooks/matchingMedia.js"
 
-const PhotgrapherPage = ({ useStore, render }) => {
+const PhotgrapherPage = ({ useStore, render, use }) => {
   const [photographer] = useStore(store => store.photographer);
   const [media] = useStore(store => store.media);
   const [sortBy, setSortBy] = useStore(store => store.mediaFilter);
   const [isContactModalOpen, setContactModalOpen] = useStore(
     store => store.contactModal.isOpened
   );
+  const [isLightboxOpened] = useStore(store => store.lightbox.isOpened);
 
   const selectedTags = getTagsFromUrl();
 
-  const filteredMedia = Object.values(media).filter(medium =>
-    selectedTags.every(selectedTag => medium.tags.includes(selectedTag))
-  );
-
   const [isLoaded, setLoaded] = useStore(store => store.loadedProfilePic);
-
-  filteredMedia.sort(sortFns[sortBy]);
 
   const { name, city, tagline, portrait, country, price, dominantColor } =
     photographer;
@@ -31,8 +28,14 @@ const PhotgrapherPage = ({ useStore, render }) => {
     return totalLikes + medium.likes + medium.liked;
   }, 0);
 
+  const hasAnyModalOpened = [isContactModalOpen, isLightboxOpened].some(
+    Boolean
+  );
+
+  const matchingMedia = use(getMatchingMedia());
+
   return html`<div id="app">
-    <header aria-hidden="${isContactModalOpen.toString()}">
+    <header aria-hidden="${hasAnyModalOpened.toString()}">
       <a class="home-link" href="..">
         <img
           id="fisheye-logo"
@@ -41,7 +44,7 @@ const PhotgrapherPage = ({ useStore, render }) => {
         />
       </a>
     </header>
-    <main aria-hidden="${isContactModalOpen.toString()}">
+    <main aria-hidden="${hasAnyModalOpened.toString()}">
       <section id="photographer">
         <div class="photographer-container">
           <div class="photographer-info-wrapper">
@@ -101,14 +104,15 @@ const PhotgrapherPage = ({ useStore, render }) => {
         </select>
       </div>
       <section id="media">
-        ${filteredMedia.map(mediumData => {
+        ${matchingMedia.map(mediumData => {
           return render(Medium(mediumData));
         })}
-        ${filteredMedia.length === 0 &&
+        ${matchingMedia.length === 0 &&
         render(html`<p class="no-result-info">Aucun media</p>`)}
       </section>
     </main>
     ${isContactModalOpen && render(ContactModale({ photographerName: name }))}
+    ${isLightboxOpened && render(LightboxModal())}
   </div>`;
 };
 

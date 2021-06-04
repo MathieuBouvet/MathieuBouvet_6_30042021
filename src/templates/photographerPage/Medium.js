@@ -3,7 +3,7 @@ import Image from "../ui/Image.js";
 import Video from "./Video.js";
 
 const Medium = (
-  { id, title, image, video, likes, liked, dominantColor },
+  { id, title, image, video, likes, liked, dominantColor, altText },
   context
 ) => {
   const { useStore, render } = context;
@@ -13,21 +13,34 @@ const Medium = (
   const [isLoaded, setLoaded] = useStore(store => store.loadedMediumImage[id]);
   const onLoad = () => setLoaded(true);
 
+  const [, setLightboxOpened] = useStore(store => store.lightbox.isOpened);
+
+  const [, setLightboxMediumId] = useStore(store => store.lightbox.mediumId);
+
   return html`<figure class="photographer-medium">
-    ${image != null &&
-    render(
-      Image({
-        image,
-        isLoaded,
-        onLoad,
-        className: "medium",
-        src: "../assets/images/photographers-pictures/medium/" + image,
-        placeholderSrc:
-          "../assets/images/photographers-pictures/low-res/" + image,
-        dominantColor,
-      })
-    )}
-    ${video != null && render(Video({ video }))}
+    <a
+      class="lightbox-link"
+      aria-label="${altText}, closeup view"
+      @click=${() => {
+        setLightboxOpened(true);
+        setLightboxMediumId(id);
+      }}
+    >
+      ${image != null &&
+      render(
+        Image({
+          image,
+          isLoaded,
+          onLoad,
+          className: "medium",
+          src: "../assets/images/photographers-pictures/medium/" + image,
+          placeholderSrc:
+            "../assets/images/photographers-pictures/low-res/" + image,
+          dominantColor,
+        })
+      )}
+      ${video != null && render(Video({ video }))}
+    </a>
     <figcaption class="medium-info">
       <h2 class="medium-title">${title}</h2>
       <p class="likes">${likesCount} <span class="sr-only">likes</span></p>

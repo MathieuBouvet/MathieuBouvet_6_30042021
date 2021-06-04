@@ -42,6 +42,7 @@
   align-items: center;
   justify-content: center;
   animation: modal-fade-in var(--modal-animation-duration) forwards;
+  z-index: 10;
 }
 .modal-container.fade {
   animation: modal-fade-out var(--modal-animation-duration) forwards;

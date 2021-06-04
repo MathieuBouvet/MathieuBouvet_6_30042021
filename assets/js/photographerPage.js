@@ -29,6 +29,12 @@ import PhotographerPage from "../../src/templates/photographerPage/index.js";
       {}
     ),
     loadedProfilePic: false,
+    lightbox: {
+      isOpened: false,
+      isClosing: false,
+      mediumId: null,
+      pictureLoaded: false,
+    },
   };
 
   const store = createStore(photographerPageData);

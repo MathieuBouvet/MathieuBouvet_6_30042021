@@ -56,3 +56,8 @@
 .like-icon.empty:before {
   font-weight: normal;
 }
+
+.lightbox-link {
+  display: block;
+  cursor: pointer;
+}

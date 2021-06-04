@@ -27,7 +27,7 @@ const ContactModal = ({ photographerName }, context) => {
     document.getElementById("contact-form-modal").focus();
   });
 
-  return html`<div
+  return html`<aside
     class="modal-container ${isClosing && "fade"}"
     role="dialog"
     aria-labelledby="contact-form-title"
@@ -84,7 +84,7 @@ const ContactModal = ({ photographerName }, context) => {
         <i class="fa fa-times"></i>
       </button>
     </section>
-  </div>`;
+  </aside>`;
 };
 
 export default template(ContactModal);

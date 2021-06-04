@@ -1,6 +1,6 @@
 .image-container {
   position: relative;
-  width: fit-content;
+  display: inline-block;
   margin: auto;
 }
 
@@ -11,6 +11,7 @@
   transition: opacity 1s;
 }
 
-.low-res-image.hidden {
+.low-res-image.hidden,
+.full-res-image.hidden {
   opacity: 0;
 }
