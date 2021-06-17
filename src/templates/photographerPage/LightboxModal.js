@@ -23,7 +23,10 @@ const LightboxModal = context => {
     media[(mediumIndex + media.length - 1) % media.length].id;
 
   useEffect(() => {
-    document.getElementById("lightbox-modal").focus();
+    const lightboxModalElement = document.getElementById("lightbox-modal");
+    if (!lightboxModalElement.contains(document.activeElement)) {
+      lightboxModalElement.focus(); // preserve the children focus state
+    }
   });
 
   const closeModal = () => {
