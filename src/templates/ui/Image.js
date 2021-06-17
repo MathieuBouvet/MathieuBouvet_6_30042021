@@ -1,14 +1,10 @@
 import { html, template } from "../../../lib/zip-template/index.js";
 
-const Image = ({
-  src,
-  placeholderSrc,
-  altText,
-  isLoaded,
-  onLoad,
-  className,
-  dominantColor,
-}) => {
+const Image = (
+  { src, placeholderSrc, altText, isLoaded, onLoad, className, dominantColor },
+  context
+) => {
+  const { render } = context;
   return html`<div class="image-container">
     <img
       src="${src}"
@@ -24,6 +20,15 @@ const Image = ({
       alt="${altText}"
       style="background-color: ${dominantColor}"
     />
+    ${!isLoaded &&
+    render(
+      html`
+        <div class="loader-container">
+          <div class="loader"></div>
+          <div class="sr-only">Chargement de l'image</div>
+        </div>
+      `
+    )}
   </div> `;
 };
 
