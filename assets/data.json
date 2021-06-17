@@ -136,7 +136,8 @@
       "tags": ["art"],
       "likes": 24,
       "date": "2011-12-08",
-      "price": 100
+      "price": 100,
+      "altText": "Sculpture en bois d'un cheval"
     },
     {
       "id": 7502053,
@@ -268,7 +269,8 @@
       "tags": ["animals"],
       "likes": 52,
       "date": "2016-06-12",
-      "price": 70
+      "price": 70,
+      "altText": "Un petit chiot joue sur une plage"
     },
 
     {
@@ -279,7 +281,8 @@
       "tags": ["travel"],
       "likes": 23,
       "date": "2017-03-18",
-      "price": 45
+      "price": 45,
+      "altText": "Plan hélico de l'arrete d'une montagne"
     },
     {
       "id": 343423425,
@@ -466,7 +469,8 @@
       "tags": ["animals"],
       "likes": 142,
       "date": "2019-08-23",
-      "price": 60
+      "price": 60,
+      "altText": "Des chevaux marchent"
     },
     {
       "id": 95234343,
@@ -576,7 +580,8 @@
       "tags": ["architecture"],
       "likes": 57,
       "date": "2020-01-20",
-      "price": 65
+      "price": 65,
+      "altText": "Plan zénital d'un échangeur autoroutier à Buenos Aires"
     },
     {
       "id": 3523523534,
@@ -598,7 +603,8 @@
       "tags": ["sport"],
       "likes": 150,
       "date": "2018-02-30",
-      "price": 70
+      "price": 70,
+      "altText": "Une gymnaste tourne sur elle meme, suspendue à une corde"
     },
     {
       "id": 235234343,

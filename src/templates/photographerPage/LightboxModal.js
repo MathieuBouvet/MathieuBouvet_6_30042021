@@ -1,6 +1,7 @@
 import { html, template } from "../../../lib/zip-template/index.js";
 import matchingMedia from "../../hooks/matchingMedia.js";
 import Image from "../ui/Image.js";
+import Video from "../ui/Video.js";
 
 const LightboxModal = context => {
   const { useEffect, useStore, use, render } = context;
@@ -92,6 +93,15 @@ const LightboxModal = context => {
             onLoad: () => setLoaded(true),
             className: "lightbox-image",
             dominantColor: medium.dominantColor,
+            altText: medium.altText,
+          })
+        )}
+        ${medium.video &&
+        render(
+          Video({
+            video: medium.video,
+            altText: medium.altText,
+            className: "lightbox-image",
           })
         )}
         <figcaption class="lightbox-medium-title">${medium.title}</figcaption>

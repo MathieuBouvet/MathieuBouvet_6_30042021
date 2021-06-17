@@ -1,6 +1,6 @@
 import { html, template } from "../../../lib/zip-template/index.js";
 import Image from "../ui/Image.js";
-import Video from "./Video.js";
+import Video from "../ui/VideoThumbnail.js";
 
 const Medium = (
   { id, title, image, video, likes, liked, dominantColor, altText },
@@ -47,7 +47,7 @@ const Medium = (
           dominantColor,
         })
       )}
-      ${video != null && render(Video({ video }))}
+      ${video != null && render(Video({ video, className: "medium", altText }))}
     </a>
     <figcaption class="medium-info">
       <h2 class="medium-title">${title}</h2>
