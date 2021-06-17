@@ -15,7 +15,7 @@ function getCenteredClass(photographerNumber) {
   return centeredClass;
 }
 
-const HomePage = template(({ render, useStore, use, useEffect }) => {
+const HomePage = template(({ render, useStore, useEffect }) => {
   const selectedTags = getTagsFromUrl();
 
   const [tags] = useStore(store => store.tags);

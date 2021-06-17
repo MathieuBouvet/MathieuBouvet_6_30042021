@@ -8,7 +8,7 @@ const LightboxModal = context => {
 
   const media = use(matchingMedia());
 
-  const [_, setOpened] = useStore(store => store.lightbox.isOpened);
+  const [, setOpened] = useStore(store => store.lightbox.isOpened);
   const [isClosing, setClosing] = useStore(store => store.lightbox.isClosing);
   const [isLoaded, setLoaded] = useStore(store => store.lightbox.pictureLoaded);
 

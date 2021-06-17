@@ -2,7 +2,7 @@ import { html, template } from "../../../lib/zip-template/index.js";
 
 const ContactModal = ({ photographerName }, context) => {
   const { useStore, useEffect } = context;
-  const [_, setOpen] = useStore(store => store.contactModal.isOpened);
+  const [, setOpen] = useStore(store => store.contactModal.isOpened);
   const [isClosing, setIsClosing] = useStore(
     store => store.contactModal.isClosing
   );
@@ -12,7 +12,9 @@ const ContactModal = ({ photographerName }, context) => {
   const onSubmit = e => {
     e.preventDefault();
     const data = new FormData(e.target);
-    
+
+    console.log(Object.fromEntries(data.entries()));
+
     closeModale();
   };
 

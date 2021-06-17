@@ -7,7 +7,7 @@ const Medium = (
   context
 ) => {
   const { useStore, render } = context;
-  const [_, setLiked] = useStore(store => store.media[id].liked);
+  const [, setLiked] = useStore(store => store.media[id].liked);
   const likesCount = likes + (liked ? 1 : 0);
 
   const [isLoaded, setLoaded] = useStore(store => store.loadedMediumImage[id]);

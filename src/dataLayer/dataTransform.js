@@ -35,12 +35,6 @@ const profilePicDominantColor = {
   p527: "#413837",
   p925: "#060709",
   p195: "#a5a5a5",
-  p243: "#c0c5c9",
-  p930: "#2a382f",
-  p82: "#dbdbdb",
-  p527: "#413837",
-  p925: "#060709",
-  p195: "#a5a5a5",
 };
 
 const pictureDominantColor = {

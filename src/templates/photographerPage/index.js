@@ -3,7 +3,6 @@ import Medium from "./Medium.js";
 import Image from "../ui/Image.js";
 import Tag from "../ui/Tag.js";
 import { getTagsFromUrl } from "../../helpers/urlHash.js";
-import { sortFns } from "../../helpers/sortMedia.js";
 import ContactModale from "./ContactModal.js";
 import LightboxModal from "./LightboxModal.js";
 import getMatchingMedia from "../../hooks/matchingMedia.js"
