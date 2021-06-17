@@ -79,29 +79,28 @@ const LightboxModal = context => {
         }
       }}
     >
-      <div class="lightbox-content-wrapper">
-        <button class="lightbox-button" @click=${previousPicture}>
-          <i class="fa fa-chevron-left"></i>
-        </button>
-        <figure>
-          ${medium.image &&
-          render(
-            Image({
-              src: `../assets/images/photographers-pictures/huge/huge_${medium.image}`,
-              placeholderSrc: `../assets/images/photographers-pictures/low-res/${medium.image}`,
-              isLoaded,
-              onLoad: () => setLoaded(true),
-              className: "lightbox-image",
-              dominantColor: medium.dominantColor,
-            })
-          )}
-          <figcaption class="lightbox-medium-title">${medium.title}</figcaption>
-        </figure>
-        <button class="lightbox-button" @click=${nextPicture}>
-          <i class="fa fa-chevron-right"></i>
-        </button>
-      </div>
+      <button class="lightbox-button" @click=${previousPicture}>
+        <i class="fa fa-chevron-left"></i>
+      </button>
+      <figure class="image-container">
+        ${medium.image &&
+        render(
+          Image({
+            src: `../assets/images/photographers-pictures/huge/huge_${medium.image}`,
+            placeholderSrc: `../assets/images/photographers-pictures/low-res/${medium.image}`,
+            isLoaded,
+            onLoad: () => setLoaded(true),
+            className: "lightbox-image",
+            dominantColor: medium.dominantColor,
+          })
+        )}
+        <figcaption class="lightbox-medium-title">${medium.title}</figcaption>
+      </figure>
+      <button class="lightbox-button" @click=${nextPicture}>
+        <i class="fa fa-chevron-right"></i>
+      </button>
       <button
+        id="close-lightbox-button"
         aria-label="close dialog"
         @click=${closeModal}
         class="lightbox-button"

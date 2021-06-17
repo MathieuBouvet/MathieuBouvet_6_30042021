@@ -2,19 +2,19 @@
   outline: none;
 }
 
-#lightbox-modal.modal-content {
+#lightbox-modal {
   background-color: white;
-}
-
-.lightbox-content-wrapper {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .lightbox-image {
   border-radius: 5px;
-  width: 1000px;
-  height: 880px;
+  width: calc(100vw - 250px);
+  max-width: 1000px;
+  height: calc(100vh - 100px);
+  max-height: 800px;
   object-fit: contain;
 }
 
@@ -33,4 +33,12 @@
 .lightbox-medium-title {
   color: var(--color-primary-1);
   font-size: 1.2rem;
+}
+
+#close-lightbox-button {
+  position: absolute;
+  padding-top: 0;
+  padding-bottom: 0;
+  top: var(--modal-content-padding);
+  right: var(--modal-content-padding);
 }
