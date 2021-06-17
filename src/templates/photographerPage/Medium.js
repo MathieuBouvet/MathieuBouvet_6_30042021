@@ -47,7 +47,7 @@ const Medium = (
           dominantColor,
         })
       )}
-      ${video != null && render(Video({ video, className: "medium", altText }))}
+      ${video != null && render(Video({ video, className: "medium", altText, dominantColor }))}
     </a>
     <figcaption class="medium-info">
       <h2 class="medium-title">${title}</h2>

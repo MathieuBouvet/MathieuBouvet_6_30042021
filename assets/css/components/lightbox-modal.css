@@ -11,9 +11,9 @@
 
 .lightbox-image {
   border-radius: 5px;
-  width: calc(100vw - 250px);
+  width: calc(100vw - 150px);
   max-width: 1000px;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 75px);
   max-height: 800px;
   object-fit: contain;
 }

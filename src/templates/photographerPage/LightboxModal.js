@@ -105,6 +105,7 @@ const LightboxModal = context => {
             video: medium.video,
             altText: medium.altText,
             className: "lightbox-image",
+            dominantColor: medium.dominantColor,
           })
         )}
         <figcaption class="lightbox-medium-title">${medium.title}</figcaption>

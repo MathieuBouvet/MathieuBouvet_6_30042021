@@ -18,9 +18,6 @@ export function addProfilePicDominantColor(photographer) {
 }
 
 export function addPictureDominantColor(medium) {
-  if (!medium.image) {
-    return medium;
-  }
   return {
     ...medium,
     dominantColor:
@@ -91,4 +88,11 @@ const pictureDominantColor = {
   p930_222959233: "#1f1f1f",
   p930_965933434: "#41322d",
   p930_777723343: "#77acce",
+  // videos
+  p243_5234343: "#80775e",
+  p930_952343423: "#b6aca4",
+  p82_8328953: "#c0b8a9",
+  p527_394583434: "#756050",
+  p925_83958935: "#dad1c6",
+  p195_9259398453: "#7c6c5b",
 };
