@@ -9,6 +9,7 @@
   "author": "mathieu bouvet",
   "license": "ISC",
   "devDependencies": {
+    "eslint": "^7.28.0",
     "serve": "^11.3.2"
   }
 }
