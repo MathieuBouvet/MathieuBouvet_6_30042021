@@ -39,13 +39,17 @@ const LightboxModal = context => {
   };
 
   const nextPicture = () => {
-    setLoaded(false);
-    setMediumId(nextMediaId);
+    if (nextMediaId !== mediumId) {
+      setLoaded(false);
+      setMediumId(nextMediaId);
+    }
   };
 
   const previousPicture = () => {
-    setLoaded(false);
-    setMediumId(previousMediaId);
+    if (nextMediaId !== mediumId) {
+      setLoaded(false);
+      setMediumId(previousMediaId);
+    }
   };
 
   return html`<aside

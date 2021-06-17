@@ -21,9 +21,16 @@ const Medium = (
     <a
       class="lightbox-link"
       aria-label="${altText}, closeup view"
+      tabindex="0"
       @click=${() => {
         setLightboxOpened(true);
         setLightboxMediumId(id);
+      }}
+      @keyup=${e => {
+        if (e.key === "Enter") {
+          setLightboxOpened(true);
+          setLightboxMediumId(id);
+        }
       }}
     >
       ${image != null &&
@@ -32,6 +39,7 @@ const Medium = (
           image,
           isLoaded,
           onLoad,
+          altText,
           className: "medium",
           src: "../assets/images/photographers-pictures/medium/" + image,
           placeholderSrc:
