@@ -74,11 +74,13 @@ const HomePage = template(({ render, useStore, useEffect }) => {
         class="main-content ${getCenteredClass(filteredPhotographers.length)}"
       >
         <h1 id="app-title">Nos Photographes</h1>
-        ${filteredPhotographers.map(photographer =>
-          render(Photographer({ ...photographer }))
-        )}
-        ${filteredPhotographers.length === 0 &&
-        render(html`<p class="no-result-info">Aucun photographe</p>`)}
+        <article>
+          ${filteredPhotographers.map(photographer =>
+            render(Photographer({ ...photographer }))
+          )}
+          ${filteredPhotographers.length === 0 &&
+          render(html`<p class="no-result-info">Aucun photographe</p>`)}
+        </article>
       </main>
     </div>
   `;
