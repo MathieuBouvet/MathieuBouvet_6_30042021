@@ -56,7 +56,7 @@ const LightboxModal = context => {
     }
   };
 
-  return html`<aside
+  return html`<div
     class="modal-container ${isClosing && "fade"}"
     role="dialog"
     aria-label="image closeup view"
@@ -68,7 +68,7 @@ const LightboxModal = context => {
   >
     <section
       id="lightbox-modal"
-      tabindex="0"
+      tabindex="-1"
       class="modal-content ${isClosing && "closing"}"
       @animationend=${closingModalFinished}
       @keyup=${e => {
@@ -83,7 +83,11 @@ const LightboxModal = context => {
         }
       }}
     >
-      <button class="lightbox-button" @click=${previousPicture}>
+      <button
+        class="lightbox-button"
+        @click=${previousPicture}
+        aria-label="previous image"
+      >
         <i class="fa fa-chevron-left"></i>
       </button>
       <figure class="image-container">
@@ -110,7 +114,11 @@ const LightboxModal = context => {
         )}
         <figcaption class="lightbox-medium-title">${medium.title}</figcaption>
       </figure>
-      <button class="lightbox-button" @click=${nextPicture}>
+      <button
+        class="lightbox-button"
+        @click=${nextPicture}
+        aria-label="next image"
+      >
         <i class="fa fa-chevron-right"></i>
       </button>
       <button
@@ -122,7 +130,7 @@ const LightboxModal = context => {
         <i class="fa fa-times"></i>
       </button>
     </section>
-  </aside>`;
+  </div>`;
 };
 
 export default template(LightboxModal);

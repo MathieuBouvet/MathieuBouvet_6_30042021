@@ -7,7 +7,6 @@ const Video = ({ video, altText, className = "", dominantColor }) => {
       src="../assets/videos/${video}"
       style="background-color: ${dominantColor}"
       controls
-      autoplay
     >
       <p>${altText}</p>
     </video>

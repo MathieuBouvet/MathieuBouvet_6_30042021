@@ -29,7 +29,7 @@ const ContactModal = ({ photographerName }, context) => {
     document.getElementById("contact-form-modal").focus();
   });
 
-  return html`<aside
+  return html`<div
     class="modal-container ${isClosing && "fade"}"
     role="dialog"
     aria-labelledby="contact-form-title"
@@ -48,10 +48,10 @@ const ContactModal = ({ photographerName }, context) => {
         }
       }}
       id="contact-form-modal"
-      tabindex="0"
+      tabindex="-1"
     >
       <h2 id="contact-form-title">Contactez-moi ${photographerName}</h2>
-      <form id="contact-form" action="" @submit=${onSubmit}>
+      <form id="contact-form" @submit=${onSubmit}>
         <div class="field-group">
           <label for="first-name">Prénom</label>
           <input id="first-name" name="firstName" type="text" class="field" />
@@ -86,7 +86,7 @@ const ContactModal = ({ photographerName }, context) => {
         <i class="fa fa-times"></i>
       </button>
     </section>
-  </aside>`;
+  </div>`;
 };
 
 export default template(ContactModal);
