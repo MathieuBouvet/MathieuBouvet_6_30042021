@@ -4,7 +4,7 @@
 
 .medium {
   border-radius: 5px;
-  width: 100%;
+  width: calc(100vw - 40px);
   height: calc(0.85 * calc(100vw - 40px));
   object-fit: cover;
 }
