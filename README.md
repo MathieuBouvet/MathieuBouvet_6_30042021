@@ -46,7 +46,7 @@ zip-template est la librairie créée spécialement pour ce projet. Son objectif
 
 Dans zip-template, la brique de base pour construire une application est le **template**.  
 Un template est simplement une fonction qui doit retourner une chaine parsable html. Mais pour plus d'éfficacité, il est préférable de retourner un appel à un utilitaire fourni par la librarie : une tagged template nommée *html*, ce qui permetra d'utiliser des **directives** dans la définition du template.  
-Une fois la fonction template définie, il préférable de l'enrober d'un appel à un autre utilitaire, *template*, ce qui va permettre d'accéder à d'autres fonctionalités, que nous verrons un peu plus loin.
+Une fois la fonction template définie, il préférable de l'enrober d'un appel à un autre utilitaire, *template*, ce qui va permettre d'accéder à d'autres fonctionalités, comme appeler d'autres templates dans nos templates. Nous verrons cela un peu plus loin.
 
 Voyons un exemple basique :
 
@@ -114,3 +114,67 @@ export default template(MyCheckbox);
 ```
 
 Voilà pour une utilisation basique des templates. Mais il reste encore à voir comment appeler ces templates, et comment gérer leur réactivité.
+
+## Le Root Template et le Store
+Le **root template** est l'objet qui va s'occuper du rendu des templates et va s'appuyer sur le **store** pour la gestion des données.  
+Ces deux objets vont effectuer le gros du travail de la librairie. Modifier les données du store signalera au root template qu'il doit se mettre à jour, et le root template s'occupera de rendre à nouveaux les templates avec les nouvelles données du store.  
+Tout ça se fait automatiquement et la seule chose à faire avec eux, c'est de les instancier. Voyons comment faire.
+
+```js
+  import { createRootTemplate, createStore } from "{path_to_library}/zip-template/index.js";
+  import MyApp from "{path_to_the_app_template}/App.js"
+  
+  // instancie un store, prend en parametre un objet de données initiale
+  const store = createStore({ myData: "initial data" });
+  
+  // récupère l'élément sur lequel attacher notre application
+  const rootElement = document.getElementById("app");
+  
+  // instancie le root template, on précise l'élément racine, puis une fonction template, et enfin le store
+  createRootTemplate(rootElement, MyApp(), store); 
+  
+```
+En éxécutant ce script au chargment de la page, notre application est initialisée. L'élément qui a pour id "app" est remplacé par le rendu du template MyApp, et on a connecté un store à notre application.
+
+On peux maintenant se servir des fonctionalités du root template et du store dans nos template de base, grâce à un object appelé **context**. Voyons cela.
+
+## Des templates dans des templates grâce à l'objet context
+
+Les templates de base vont recevoir en dernier parametre l'objet context. Le context contient une fonction *render*, qui nous interesse ici, car elle permet d'appeler des templates depuis un templates.
+
+Reprenons notre deuxième template :
+```js
+// FILE : App.js
+
+import { html, template } from "{path-to-library}/zip-template/index.js";
+
+// Il suffira d'appeler ce template avec un paramêtre pour afficher un message dynamique
+const MyTemplate = (name) => {
+  return html`<div>Hello ${name}</div>`
+}
+
+export default template(MyTemplate);
+```
+
+Considérons le template MyApp transformé en root template de l'exemple précédent :
+```js
+// FILE : MyApp.js
+
+import { html, template } from "{path-to-library}/zip-template/index.js";
+import MyTemplate from "./MyTemplate.js";
+
+const MyApp = (context) => { // reçois le context en dernier parametre
+  const { render } = context; // On extrait la function render
+
+  return html`<div>
+    <h1>My App</h1>
+    <p>This is my app</p>
+    ${render(MyTemplate("John"))} // inclu notre template, ce qui va afficher "Hello John"
+  </div>`
+}
+
+export default template(MyTemplate);
+```
+Le template *MyTemplate* aura ainsi accès à l'objet **context** et pourra lui aussi appeler d'autres templates de cette façon.  
+Comme l'appel à *render* se déroule dans une expression, il n'est pas possible d'effectuer des appel conditionels, ou itérer sur des tableaux, avec les structures classiques, (if, else, for, etc).  
+On peut utiliser une fonction qui retourne un appel à *render*, ou utiliser une syntaxe déclarative, comme l'operateur ternaire, ou la méthode *map* des tableaux
