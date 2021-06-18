@@ -2,7 +2,11 @@ import { html, template } from "../../../lib/zip-template/index.js";
 import Photographer from "./Photographer.js";
 import Tag from "../ui/Tag.js";
 import GoToContent from "./GoToContent.js";
-import { getTagsFromUrl, getHashParams, getHashString } from "../../helpers/urlHash.js";
+import {
+  getTagsFromUrl,
+  getHashParams,
+  getHashString,
+} from "../../helpers/urlHash.js";
 
 function getCenteredClass(photographerNumber) {
   let centeredClass = "";
@@ -74,12 +78,41 @@ const HomePage = template(({ render, useStore, useEffect }) => {
         class="main-content ${getCenteredClass(filteredPhotographers.length)}"
       >
         <h1 id="app-title">Nos Photographes</h1>
+        ${filteredPhotographers.map(photographer =>
+          render(Photographer({ ...photographer }))
+        )}
+        ${filteredPhotographers.length === 0 &&
+        render(html`<p class="no-result-info">Aucun photographe</p>`)}
         <article>
-          ${filteredPhotographers.map(photographer =>
-            render(Photographer({ ...photographer }))
-          )}
-          ${filteredPhotographers.length === 0 &&
-          render(html`<p class="no-result-info">Aucun photographe</p>`)}
+          <h2>test</h2>
+          <p>
+            content content conten content content contentcontent content
+            contentcontent content contentcontent content contentt content
+            content content content content content
+          </p>
+          <p>
+            content content conten content content contentcontent content
+            contentcontent content contentcontent content contentt content
+            content content content content content content content conten
+            content content contentcontent content contentcontent content
+            contentcontent content contentt content content content content
+            content content
+          </p>
+          <p>
+            content content conten content content contentcontent content
+            contentcontent content contentcontent content contentt content
+            content content content content content
+          </p>
+          <p>
+            content content conten content content contentcontent content
+            contentcontent content contentcontent content contentt content
+            content content content content content content content conten
+            content content contentcontent content contentcontent content
+            contentcontent content contentt content content content content
+            content content content content conten content content
+            contentcontent content contentcontent content contentcontent content
+            contentt content content content content content content
+          </p>
         </article>
       </main>
     </div>
