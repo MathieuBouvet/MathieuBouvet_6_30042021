@@ -138,7 +138,7 @@ En éxécutant ce script au chargment de la page, notre application est initiali
 
 On peux maintenant se servir des fonctionalités du root template et du store dans nos template de base, grâce à un object appelé **context**. Voyons cela.
 
-## Des templates dans des templates grâce à l'objet context
+## Des templates dans des templates grâce à l'objet context -> la fonction "render"
 
 Les templates de base vont recevoir en dernier parametre l'objet context. Le context contient une fonction *render*, qui nous interesse ici, car elle permet d'appeler des templates depuis un templates.
 
@@ -177,4 +177,53 @@ export default template(MyTemplate);
 ```
 Le template *MyTemplate* aura ainsi accès à l'objet **context** et pourra lui aussi appeler d'autres templates de cette façon.  
 Comme l'appel à *render* se déroule dans une expression, il n'est pas possible d'effectuer des appel conditionels, ou itérer sur des tableaux, avec les structures classiques, (if, else, for, etc).  
-On peut utiliser une fonction qui retourne un appel à *render*, ou utiliser une syntaxe déclarative, comme l'operateur ternaire, ou la méthode *map* des tableaux
+On peut utiliser une syntaxe déclarative, comme l'operateur ternaire, ou la méthode *map* des tableaux.
+
+## Gestion des données et réactivité grâce à l'objet context -> la fonction *useStore*
+
+La fonction **useStore** de l'objet **context** va permettre de lire et d'écrire les données du store. L'écriture dans le store va déclencher le rendu des templates et permet d'avoir une application toujours à jour.
+
+La fonction *useStore* prend une fonction de séléction en paramètre, et va retourner un couple de valeur, la première est la valeur séléctionnée, la seconde est une fonction qui permet de modifier cette valeur. 
+
+Par exemple :
+
+```js
+/* Suposons que le store ait été initialisé avec ces valeurs :
+{
+  name: "John",
+  lastName: "Doe",
+ 
+ }
+ */
+ 
+ import { html, template } from "{path-to-library}/zip-template/index.js";
+
+
+const MyTemplate = (context) => {
+  const { useStore } = context;
+  
+  const [name, setName] = useStore(store => store.name);
+  
+  return html`<div>
+    <p>Hello ${name}</p> // affiche "Hello John"
+    <button @click=${() => setName("unknown")}>Forget my name</button>
+    // au click, le nom est remplacé par "unknown"
+    // la librairie déclenche un nouveau rendu, le template se met à jour et affiche "Hello unknown"
+   </div>`
+}
+
+export default template(MyTemplate);
+
+```
+
+### Limite de la librairie
+
+Cette librairie peut être adaptée à des projets de taille modeste, mais peut difficilement scaler pour des projets plus importants.
+Deux principales raisons à cela :  
+La première concerne les performances, il n'y a pas d'implémentation de DOM virtuel, ce qui va poser problême sur des projets avec beaucoup d'élement. De plus, même si les rendu s'effectuent de manière asynchrone, il n'y a pas de fragmentation en unités de travail. Un rendu est donc bloquant.  
+La seconde concerne la réutilisabilité du code. Il n'est pas possible de créer un état local à un template, seulement de se connecter à un store, qui est global. Il est donc difficile de créer des templates complêtement réutilisables, à part pour des templates purement présentationels.
+
+ 
+ 
+ 
+ 
