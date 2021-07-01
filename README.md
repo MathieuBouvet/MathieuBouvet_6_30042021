@@ -40,7 +40,9 @@ Par exemple pour vscode : [lit-html vscode](https://marketplace.visualstudio.com
 
 ## Documentation zip-template
 
-zip-template est la librairie créée spécialement pour ce projet. Son objectif est de faciliter le développement, en favorisant la réutilisabilité du code html, et gère automatiquement les mise à jour du DOM lorsque les données des templates changent. Voyons comment s'en servir.
+zip-template est la librairie créée spécialement pour ce projet. Son objectif est de faciliter le développement, en favorisant la réutilisabilité du code html, et gère automatiquement les mise à jour du DOM lorsque les données des templates changent.  
+
+**Une sandbox avec des examples d'utilisation basique est disponible ici** [https://codesandbox.io/s/zip-template-example-ykwb7](https://codesandbox.io/s/zip-template-example-ykwb7)
 
 ### Brique de base : le template
 
